@@ -1,0 +1,294 @@
+project:
+  name: Zuni
+  tagline: >
+    A tiny AI CLI that unifies many LLM providers behind one interface.
+    Goal is not to build another model, but to collect, normalize and expose them
+    with a clean developer experience.
+
+status: active
+stage: early-alpha
+philosophy:
+  - small > big
+  - utility > hype
+  - unix philosophy
+  - install and use immediately
+  - providers are plugins
+  - users own their API keys
+  - minimal dependencies
+  - self-host friendly
+
+current_direction:
+  main_goal:
+    Build a lightweight AI CLI similar to git/curl where users can access
+    different LLMs from one command.
+
+  not_goal:
+    - train models
+    - host expensive inference
+    - become another chat UI
+    - replace providers
+
+core_identity:
+  type: CLI
+  language: Python
+  package_manager: pip
+  install:
+    command: |
+      curl -fSsl https://github.com/ssannssarr/Zuni/raw/refs/heads/main/install.sh | sh
+
+planned_commands:
+
+  ask:
+    description: Ask an LLM.
+
+    examples:
+      - zuni ask "Explain transformers"
+      - zuni ask -m gemini
+      - zuni ask -p "hello"
+
+  search:
+    description: Search internet then answer.
+
+  models:
+    description: List available models.
+
+  providers:
+    description: Show configured providers.
+
+  config:
+    description: Manage configuration.
+
+  auth:
+    description: Store API keys.
+
+  update:
+    description: Update Zuni.
+
+  doctor:
+    description: Diagnose installation.
+
+  version:
+    description: Show version.
+
+cli_design:
+  inspiration:
+    - git
+    - uv
+    - gh
+    - docker
+
+  command_style:
+    root_command: zuni
+    examples:
+      - zuni ask
+      - zuni search
+      - zuni models
+      - zuni config
+      - zuni auth
+
+technical_progress:
+
+  completed:
+    - basic Python CLI prototype
+    - experimenting with argparse
+    - argument parsing understanding
+    - install.sh bootstrap
+    - GitHub repository created
+
+  in_progress:
+    - command architecture
+    - provider abstraction
+    - better CLI UX
+
+  not_started:
+    - configuration system
+    - plugin system
+    - caching
+    - conversation history
+    - streaming abstraction
+    - provider auto discovery
+    - shell completion
+    - packaging
+    - tests
+    - documentation
+
+providers:
+
+  current_interest:
+    - Google Gemini
+    - OpenAI
+    - Anthropic
+    - OpenRouter
+    - Ollama
+    - Local models
+
+  future:
+    - Groq
+    - Together AI
+    - Fireworks
+    - DeepSeek
+    - xAI
+    - Cohere
+    - Mistral
+
+architecture:
+
+  idea:
+
+    user:
+      |
+      zuni ask "Hello"
+
+    cli:
+      parses_command: true
+
+    router:
+      selects_provider: true
+
+    provider:
+      returns_normalized_response: true
+
+    output:
+      streams_to_terminal: true
+
+normalization:
+
+  goal:
+    Every provider should expose nearly identical interface.
+
+  example:
+    input:
+      prompt: Hello
+      model: gemini
+
+    provider_specific:
+      gemini: generateContent()
+      openai: chat.completions()
+      anthropic: messages.create()
+
+    unified_output:
+      text: Hello!
+      usage:
+        input_tokens: ...
+        output_tokens: ...
+
+current_learning:
+
+  python:
+    - argparse
+    - sys.argv
+    - subcommands
+    - piping
+    - CLI architecture
+
+  research:
+    - provider APIs
+    - self-hosting
+    - search APIs
+    - installation methods
+
+future_features:
+
+  - streaming output
+  - markdown rendering
+  - syntax highlighting
+  - chat sessions
+  - shell aliases
+  - clipboard support
+  - image generation
+  - web search
+  - local model support
+  - tool calling
+  - MCP support
+  - provider plugins
+
+possible_structure:
+
+  zuni/
+    __main__.py:
+    cli.py:
+    commands:
+      ask.py:
+      search.py:
+      models.py:
+      config.py:
+      auth.py:
+    providers:
+      base.py:
+      gemini.py:
+      openai.py:
+      anthropic.py:
+      ollama.py:
+    utils:
+    config:
+    cache:
+
+social:
+
+  primary_platform: Threads
+
+  strategy:
+    - build in public
+    - short development logs
+    - CLI demos
+    - progress updates
+    - interesting implementation details
+
+branding:
+
+  name: Zuni
+
+  personality:
+    - tiny
+    - clean
+    - developer focused
+    - fast
+    - minimal
+
+known_decisions:
+
+  accepted:
+    - Python over React Native
+    - command-based CLI
+    - Unix-like UX
+    - install via curl
+    - provider abstraction
+
+  rejected:
+    - making a large all-in-one platform
+    - focusing on only one provider
+
+open_questions:
+
+  - configuration format (JSON/TOML/YAML)
+  - plugin API design
+  - authentication storage
+  - caching strategy
+  - telemetry or no telemetry
+  - update mechanism
+  - package distribution (pip, standalone binary, both)
+
+vision:
+
+  short_term:
+    Build a reliable CLI that can talk to multiple AI providers with one command.
+
+  medium_term:
+    Become a useful everyday developer tool similar to curl or gh for AI.
+
+  long_term:
+    A universal AI command-line toolkit with plugins, local models, search,
+    automation, and scripting support while staying lightweight.
+
+repository:
+  status: active
+  maturity: experimental
+  focus: architecture before features
+
+handoff_summary: |
+  Zuni is currently in the architecture phase rather than the feature phase.
+  The CLI concept is established, the command structure is being designed,
+  and provider abstraction is the primary engineering task. Most work so far
+  has been exploring CLI patterns, argparse, installation, and API integration.
+  The project intentionally prioritizes a clean foundation over rapid feature
+  accumulation.
