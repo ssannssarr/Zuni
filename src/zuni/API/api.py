@@ -4,7 +4,7 @@ from dataclasses import dataclass
 import httpx
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass(frozen=True)
 class APIConfig:
     API_KEY: str | None
     BASE_URL: str | None
@@ -15,19 +15,24 @@ class APIConfig:
 class OpenAI:
 
     def __init__(self, config: APIConfig):
-        self.api_key = config['API_KEY']
-        self.base_url = config['BASE_URL']
-        self.model = config['MODEL']
-        self.timeout = config['TIMEOUT']
+        self.api_key = config.API_KEY
+        self.base_url = config.BASE_URL
+        self.model = config.MODEL
+        self.timeout = config.TIMEOUT
+        self.aclient = httpx.AsyncClient(
+            base_url=self.base_url,
+            timeout=self.timeout
+        )
 
     def headers(self) -> dict[str, Any]:
         if not self.api_key:
-            raise RuntimeError("API Ky not found in config")
+            raise RuntimeError("API Key not found in config")
 
-        return {
-            "Authoriztion": f"Bearer {self.api_key}",
+        headers = {
+            "Authorization": f"Bearer {self.api_key}",
             "Content-Type": "application/json"
         }
+        return headers
 
     def payload(
         self,
@@ -49,12 +54,7 @@ class OpenAI:
         tools: list[dict[str, Any]] | None = None,
     ) -> list[dict[str, Any]]:
 
-        aclient = httpx.AsyncClient(
-            base_url=self.base_url,
-            timeout=self.timeout
-        )
-
-        response = await aclient.post(
+        response = await self.aclient.post(
             "/v1/chat/completions",
             headers=self.headers(),
             json=self.payload(
