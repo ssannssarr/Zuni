@@ -19,6 +19,9 @@ temp = APIConfig(
 chat = []
 
 
+async def runloop():
+
+
 def add(
     role: str | None,
     content: str | None,
