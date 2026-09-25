@@ -1,7 +1,7 @@
 [project]
 name = "zuni"
 version = "0.1.0"
-description = "Add your description here"
+description = "Small CLI doubt solver."
 readme = "README.md"
 authors = [
     { name = "ssannssarr", email = "ssantanusarkar8@gmail.com" }
