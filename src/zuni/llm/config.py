@@ -2,15 +2,12 @@
 import os
 import json
 from pathlib import Path
+from typing import Any
 
 # Declaring Configuration Dir/Files
 HOME = Path.home()
-DIR = Path(
-    HOME / ".config" / "zuni"
-)
-FILE = Path(
-    DIR / "config.json"
-)
+DIR = HOME / ".config" / "zuni"
+FILE = DIR / "config.json"
 
 
 def check_dir():
@@ -33,14 +30,31 @@ def api_key() -> str:
 
     IF in this two steps API_KEY is not found raise `RuntimeError` with relevant message
     """
-    if os.getenv("OPENROUTER_API_KEY"):
-        return os.getenv("OPENROUTER_API_KEY")
 
-    if FILE.exists():
-        config = json.load(FILE)
-        if config.API_KEY:
-            return config.API_KEY
-        raise RuntimeError(
-            "Configuration File does exist but API_KEY is not present their."
-        )
+    # This is for checking value in user's local Environment
+    key = os.getenv("OPENROUTER_API_KEY")
+    if key:
+        return key
+
+    # This is for checking value in config file.
+    config = load_config()
+    key = config.get("API_KEY")
+    if key:
+        return key
+
+    # This raise's error if API_KEY is not found in both places
     raise RuntimeError("API_KEY is not present in env or config file.")
+
+
+def load_config() -> dict[str, Any]:
+    """
+    This Method loads the Configuration values from the config file
+    """
+    if FILE.exists():
+        with open(FILE) as config:
+            data = json.load(config)
+            return data
+    raise RuntimeError("Configuration File doesn't exists!")
+
+
+print(api_key())
