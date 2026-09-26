@@ -1,6 +1,6 @@
 "This file is for Configuration purposes"
-import os
 import json
+import os
 from pathlib import Path
 from typing import Any
 
@@ -8,14 +8,6 @@ from typing import Any
 HOME = Path.home()
 DIR = HOME / ".config" / "zuni"
 FILE = DIR / "config.json"
-
-
-def check_dir():
-    """
-    Checks that Configuration DIR exists or NOT!
-    """
-    if not DIR.exists():
-        raise RuntimeError("Configuration DIR doesn't exists!")
 
 
 def api_key() -> str:
@@ -50,11 +42,15 @@ def load_config() -> dict[str, Any]:
     """
     This Method loads the Configuration values from the config file
     """
-    if FILE.exists():
-        with open(FILE) as config:
-            data = json.load(config)
-            return data
-    raise RuntimeError("Configuration File doesn't exists!")
+    # Checks Config File Exixst's or Not
+    if not FILE.exists():
+        raise RuntimeError(
+            "Configuration File doesn't exists!"
+        )
 
-
-print(api_key())
+    # Checks config file and return json values
+    with FILE.open(
+        "r",
+        encoding="utf-8"
+    ) as config:
+        return json.load(config)
