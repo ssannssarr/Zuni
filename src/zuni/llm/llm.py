@@ -1,18 +1,18 @@
 "This file is fro actual llm calling"
-import json
 from typing import Any
 import httpx as ht
 
 
 class LLM:
     """
-    This is class for calling llm api from https://openrouter.ai
+    This is class for calling llm api from OpenAI competible API.
     """
 
     def __init__(
         self,
         api_key: str,
         model: str,
+        base_url: str | None = "https://openrouter.ai/api/v1"
     ) -> None:
         """
         Declaring the api_key and model value.
@@ -75,7 +75,7 @@ class LLM:
         async with self.aclient.post(
             url="/chat/completions",
             headers=headers,
-            json=payload
+            json=payload,
         ) as res:
             res.raise_for_status()
             return res.json()

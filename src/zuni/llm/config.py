@@ -57,6 +57,34 @@ def load_config() -> dict[str, Any]:
         return json.load(config)
 
 
+def save_config(
+        api_key: str,
+        model: str,
+        base_url: str,
+) -> None:
+    """
+    This method save's Configuration values.
+    """
+    CONFIG_DIR.mkdir(
+        parents=True,
+        exist_ok=True
+    )
+    data = {
+        "API_KEY": api_key,
+        "MODEL": model,
+        "BASE_URL": base_url
+    }
+
+    CONFIG_FILE.write_text(
+        data=json.dumps(
+            data,
+            indent=4
+        ),
+        encoding='utf-8',
+
+    )
+
+
 def model() -> str:
     """
     This method loads model id saved in config file.
@@ -72,13 +100,30 @@ def model() -> str:
     return "openrouter/free"
 
 
+def baseUrl() -> str:
+    """
+    loads base_url from env or config file.
+    """
+    url = os.getenv("ZUNI_BASE_URL")
+    if url:
+        return url
+
+    config = load_config()
+
+    url = config.get("BASE_URL")
+    if url:
+        return url
+
+
 def Config() -> dict[str, Any]:
     """
     This method loads both model and api_key value and returns in json format.
     """
     apikey = api_key()
     modelid = model()
+    base_url = baseUrl()
     return {
         "API_KEY": apikey,
         "MODEL": modelid,
+        "BASE_URL": base_url
     }
