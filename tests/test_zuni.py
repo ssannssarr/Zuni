@@ -22,7 +22,7 @@ def test_save_and_load_config(tmp_path, monkeypatch):
     assert config_module.load_config() == {
         "API_KEY": "test-key",
         "MODEL": "test-model",
-        "BASE_URL": "https://example.com/v1",
+        "BASE_URL": "https://example.com/v1/",
     }
 
 
@@ -97,7 +97,8 @@ def test_base_url_from_config(monkeypatch):
 def test_config_combines_values(monkeypatch):
     monkeypatch.setattr(config_module, "api_key", lambda: "key")
     monkeypatch.setattr(config_module, "model", lambda: "model")
-    monkeypatch.setattr(config_module, "baseUrl", lambda: "https://example.com/v1")
+    monkeypatch.setattr(config_module, "baseUrl",
+                        lambda: "https://example.com/v1")
 
     assert config_module.Config() == {
         "API_KEY": "key",
