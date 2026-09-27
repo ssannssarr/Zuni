@@ -1,10 +1,10 @@
 "This is main entry point"
 from zuni.llm.config import save_config
-import asyncclick as click
+import asyncclick as ac
 
 
-@click.group
-def main():
+@ac.group()
+async def main():
     """
     This creats a cli group.
     So, all the commands stays at one place.
@@ -14,14 +14,14 @@ def main():
 
 @main.command()
 async def config():
-    api_key = await click.prompt(
+    api_key = await ac.prompt(
         "Enter your API key",
         hide_input=True
     )
-    model = await click.prompt(
+    model = await ac.prompt(
         "Enter model ID"
     )
-    base_url = await click.prompt(
+    base_url = await ac.prompt(
         "Enter Base Url"
     )
 
@@ -31,7 +31,7 @@ async def config():
         base_url=base_url
     )
 
-    click.echo("Configuration saved.")
+    ac.echo("Configuration saved.")
 
 
 if __name__ == "__main__":

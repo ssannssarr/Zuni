@@ -20,7 +20,7 @@ class LLM:
         self.api_key = api_key
         self.model = model
         self.aclient = ht.AsyncClient(
-            base_url="https://openrouter.ai/api/v1",
+            base_url=base_url,
         )
 
     def headers(
@@ -62,7 +62,7 @@ class LLM:
         self,
         chat: list[dict[str, Any]],
         tools: list[dict[str, Any]] | None = None,
-    ) -> None:
+    ) -> dict[str, Any]:
         """
         the main process does here.
         """
@@ -72,10 +72,11 @@ class LLM:
             tools=tools
         )
 
-        async with self.aclient.post(
-            url="/chat/completions",
+        res = await self.aclient.post(
+            url="/chat/completion",
             headers=headers,
-            json=payload,
-        ) as res:
-            res.raise_for_status()
-            return res.json()
+            json=payload
+        )
+
+        res.raise_for_status()
+        return res.json()
