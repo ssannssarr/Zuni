@@ -73,7 +73,7 @@ class LLM:
         )
 
         res = await self.aclient.post(
-            url="/chat/completion",
+            url="/chat/completions",
             headers=headers,
             json=payload
         )
