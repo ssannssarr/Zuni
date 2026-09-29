@@ -1,5 +1,9 @@
 "This is main entry point"
-from zuni.llm.config import save_config
+from zuni.llm.config import (
+    save_config,
+    Config
+)
+from zuni.llm.llm import LLM
 import asyncclick as ac
 
 
@@ -14,6 +18,9 @@ async def main():
 
 @main.command()
 async def config():
+    """
+    This method is for setting config values.
+    """
     api_key = await ac.prompt(
         "Enter your API key",
         hide_input=True
@@ -32,6 +39,20 @@ async def config():
     )
 
     ac.echo("Configuration saved.")
+
+
+@main.command()
+@ac.argument(
+    "prompt",
+    required=True
+)
+async def ask(
+    prompt: str | None = None
+):
+    """
+    This method is for asking an question directly from terminal.
+    """
+    cnfg = Config()
 
 
 if __name__ == "__main__":

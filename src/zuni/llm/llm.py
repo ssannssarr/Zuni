@@ -77,6 +77,4 @@ class LLM:
             headers=headers,
             json=payload
         )
-
-        res.raise_for_status()
         return res.json()
