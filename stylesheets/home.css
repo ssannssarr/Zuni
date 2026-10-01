@@ -1,0 +1,542 @@
+:root {
+  --zuni-bg: #08090c;
+  --zuni-surface: #101217;
+  --zuni-border: rgba(255, 255, 255, 0.09);
+  --zuni-text: #f2f3f5;
+  --zuni-muted: #969aa5;
+  --zuni-accent: #b8ff5a;
+}
+
+.md-content__inner {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* ---------- Hero ---------- */
+.zuni-hero {
+  min-height: 650px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 24px 100px;
+  background:
+    radial-gradient(circle at 50% 20%, rgba(184, 255, 90, 0.10), transparent 35%),
+    var(--zuni-bg);
+}
+
+.zuni-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 13px;
+  border: 1px solid var(--zuni-border);
+  border-radius: 999px;
+  color: var(--zuni-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--zuni-accent);
+  box-shadow: 0 0 12px rgba(184, 255, 90, 0.7);
+}
+
+.zuni-hero h1 {
+  max-width: 900px;
+  margin: 28px 0 20px;
+  font-size: clamp(3.5rem, 9vw, 7rem);
+  line-height: 0.92;
+  letter-spacing: -0.065em;
+  font-weight: 800;
+}
+
+.zuni-hero h1 span {
+  color: var(--zuni-accent);
+}
+
+.hero-subtitle {
+  max-width: 650px;
+  margin: 0 auto;
+  color: var(--zuni-muted);
+  font-size: 1.15rem;
+  line-height: 1.7;
+}
+
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 34px;
+}
+
+/* ---------- Buttons ---------- */
+.zuni-button {
+  display: inline-block;
+  padding: 12px 19px;
+  border-radius: 8px;
+  font-weight: 700;
+  text-decoration: none !important;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.zuni-button:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+.zuni-button.primary {
+  color: #08090c;
+  background: var(--zuni-accent);
+}
+
+.zuni-button.secondary {
+  color: var(--zuni-text);
+  border: 1px solid var(--zuni-border);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* ---------- Terminal ---------- */
+.terminal-window {
+  position: relative;
+  z-index: 2;
+  max-width: 850px;
+  margin: -45px auto 120px;
+  border: 1px solid var(--zuni-border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #0d0f13;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+}
+
+.terminal-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 42px;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--zuni-border);
+  background: #13161c;
+}
+
+.terminal-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.terminal-dots span {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #454952;
+}
+
+.terminal-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #777c87;
+  font-size: 0.75rem;
+}
+
+.terminal-body {
+  padding: 28px;
+  text-align: left;
+}
+
+.terminal-body pre,
+.terminal-body .highlight {
+  margin: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* ---------- Sections ---------- */
+.section-intro,
+.code-section,
+.project-section,
+.final-cta {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 100px 24px;
+}
+
+.section-label {
+  margin-bottom: 14px;
+  color: var(--zuni-accent);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+}
+
+.section-intro h2,
+.code-section h2,
+.project-section h2,
+.final-cta h2 {
+  margin: 0 0 18px;
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  line-height: 1;
+  letter-spacing: -0.045em;
+}
+
+.section-intro p,
+.code-section p,
+.project-section p {
+  max-width: 620px;
+  color: var(--zuni-muted);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+/* ---------- Features ---------- */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.feature-card {
+  padding: 28px;
+  border: 1px solid var(--zuni-border);
+  border-radius: 12px;
+  background: var(--zuni-surface);
+}
+
+.feature-icon {
+  margin-bottom: 25px;
+  font-size: 1.5rem;
+}
+
+.feature-card h3 {
+  margin-bottom: 10px;
+}
+
+.feature-card p {
+  margin: 0;
+  color: var(--zuni-muted);
+  line-height: 1.6;
+}
+
+/* ---------- Flow ---------- */
+.flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.flow-step {
+  flex: 1;
+  padding: 25px;
+  border: 1px solid var(--zuni-border);
+  border-radius: 12px;
+  background: var(--zuni-surface);
+}
+
+.flow-number {
+  display: block;
+  margin-bottom: 25px;
+  color: var(--zuni-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.flow-step strong {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 1.2rem;
+}
+
+.flow-step p {
+  margin: 0;
+  color: var(--zuni-muted);
+}
+
+.flow-arrow {
+  color: var(--zuni-muted);
+  font-size: 1.5rem;
+}
+
+/* ---------- Code section ---------- */
+.code-section {
+  margin-top: 60px;
+}
+
+.code-section pre {
+  max-width: 700px;
+  margin: 30px 0 !important;
+  border: 1px solid var(--zuni-border);
+  border-radius: 10px;
+}
+
+.text-link {
+  color: var(--zuni-accent);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* ---------- Open source / CTA ---------- */
+.project-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  border-top: 1px solid var(--zuni-border);
+  border-bottom: 1px solid var(--zuni-border);
+}
+
+.final-cta {
+  padding-top: 150px;
+  padding-bottom: 150px;
+  text-align: center;
+}
+
+.final-cta p {
+  margin: 25px auto 30px;
+  color: var(--zuni-muted);
+  font-size: 1.15rem;
+  line-height: 1.7;
+}
+
+/* ---------- Mobile ---------- */
+@media screen and (max-width: 768px) {
+  .zuni-hero {
+    min-height: 580px;
+    padding-top: 60px;
+  }
+
+  .zuni-hero h1 {
+    font-size: clamp(3rem, 15vw, 5rem);
+  }
+
+  .terminal-window {
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .flow {
+    flex-direction: column;
+  }
+
+  .flow-step {
+    width: 100%;
+  }
+
+  .flow-arrow {
+    transform: rotate(90deg);
+  }
+
+  .project-section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ---------- Laptop / full-width fix ---------- */
+.md-main__inner:has(.zuni-hero) {
+  max-width: none;
+  margin: 0;
+}
+
+.md-content:has(.zuni-hero) {
+  max-width: none;
+}
+
+.md-content__inner:has(.zuni-hero)::before {
+  display: none;
+}
+
+@media screen and (min-width: 769px) {
+  .zuni-hero {
+    min-height: 82vh;
+  }
+}
+
+/* ---------- Light mode ---------- */
+[data-md-color-scheme="default"] {
+  --zuni-bg: #fafaf7;
+  --zuni-surface: #ffffff;
+  --zuni-border: rgba(0, 0, 0, 0.10);
+  --zuni-text: #111111;
+  --zuni-muted: #5b606b;
+  --zuni-accent: #3f8f00;
+}
+
+[data-md-color-scheme="default"] .zuni-hero {
+  background:
+    radial-gradient(circle at 50% 20%, rgba(63, 143, 0, 0.12), transparent 35%),
+    var(--zuni-bg);
+}
+
+[data-md-color-scheme="default"] .zuni-button.primary {
+  color: #ffffff;
+}
+
+[data-md-color-scheme="default"] .zuni-button.secondary {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+/* terminal stays dark in both modes */
+.terminal-body code,
+.terminal-body .highlight span {
+  color: #e6e8ec !important;
+}
+
+/* smooth theme switch */
+.zuni-hero,
+.feature-card,
+.flow-step,
+.zuni-button {
+  transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+/* ================= Near-black + glass blur ================= */
+:root,
+[data-md-color-scheme="slate"] {
+  --zuni-bg: #030303;
+  --zuni-surface: rgba(255, 255, 255, 0.04);
+  --zuni-border: rgba(255, 255, 255, 0.08);
+
+  --md-default-bg-color: #030303;
+  --md-default-bg-color--light: rgba(3, 3, 3, 0.7);
+  --md-code-bg-color: rgba(255, 255, 255, 0.04);
+}
+
+body,
+.md-main {
+  background: #030303;
+}
+
+/* blurred glow orbs behind home */
+.zuni-hero {
+  position: relative;
+  overflow: hidden;
+  background: #030303;
+}
+
+.zuni-hero::before,
+.zuni-hero::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  border-radius: 50%;
+  filter: blur(110px);
+  pointer-events: none;
+}
+
+.zuni-hero::before {
+  width: 420px;
+  height: 420px;
+  top: -80px;
+  left: 12%;
+  background: rgba(184, 255, 90, 0.22);
+}
+
+.zuni-hero::after {
+  width: 360px;
+  height: 360px;
+  bottom: -60px;
+  right: 10%;
+  background: rgba(90, 160, 255, 0.16);
+}
+
+.zuni-hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* glass header */
+.md-header,
+.md-tabs {
+  background: rgba(3, 3, 3, 0.55) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  backdrop-filter: blur(18px) saturate(160%);
+  border-bottom: 1px solid var(--zuni-border);
+  box-shadow: none;
+}
+
+/* glass cards */
+.feature-card,
+.flow-step,
+.terminal-window,
+.zuni-badge,
+.zuni-button.secondary {
+  background: rgba(255, 255, 255, 0.04);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  backdrop-filter: blur(20px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.terminal-header {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.feature-card:hover,
+.flow-step:hover {
+  border-color: rgba(184, 255, 90, 0.35);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.feature-card,
+.flow-step {
+  transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+}
+
+/* ================= Mobile drawer + header ================= */
+@media screen and (max-width: 76.1875em) {
+  .md-nav--primary,
+  .md-nav--primary .md-nav,
+  .md-sidebar--primary {
+    background: rgba(3, 3, 3, 0.72) !important;
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    backdrop-filter: blur(24px) saturate(160%);
+  }
+
+  .md-nav--primary .md-nav__title {
+    background: rgba(255, 255, 255, 0.04) !important;
+    color: var(--zuni-text);
+    border-bottom: 1px solid var(--zuni-border);
+  }
+
+  .md-nav--primary .md-nav__title[for="__drawer"] {
+    background: rgba(3, 3, 3, 0.6) !important;
+  }
+
+  .md-nav__link--active,
+  .md-nav__item .md-nav__link:hover {
+    color: var(--zuni-accent) !important;
+  }
+
+  .md-overlay {
+    background: rgba(0, 0, 0, 0.6);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+  }
+
+  .md-header {
+    background: rgba(3, 3, 3, 0.6) !important;
+  }
+}
