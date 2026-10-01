@@ -10,12 +10,6 @@ from rich.markdown import Markdown as md
 import asyncclick as ac
 
 console = Console()
-cnfg = Config()
-llm = LLM(
-    api_key=cnfg["API_KEY"],
-    model=cnfg["MODEL"],
-    base_url=cnfg["BASE_URL"]
-)
 
 
 @ac.group()
@@ -63,22 +57,30 @@ async def ask(
     """
     This method is for asking an question directly from terminal.
     """
+    cnfg = Config()
+    llm = LLM(
+        api_key=cnfg["API_KEY"],
+        model=cnfg["MODEL"],
+        base_url=cnfg["BASE_URL"]
+    )
 
-    prmpt = Prompt()
-    chat = [
-        {
-            "role": "system",
-            "content": prmpt["system"]
-        },
-        {
-            "role": "user",
-            "content": prompt
-        }
-    ]
+    async def msg():
+        prmpt = Prompt()
+        chat = [
+            {
+                "role": "system",
+                "content": prmpt["system"]
+            },
+            {
+                "role": "user",
+                "content": prompt
+            }
+        ]
 
-    res = await llm.ask(chat=chat)
-    msg = res["choices"][0]["message"]["content"]
-
+        res = await llm.ask(chat=chat)
+        msg = res["choices"][0]["message"]["content"]
+        return msg
+    msg = await msg()
     console.print(md(msg))
 
 if __name__ == "__main__":

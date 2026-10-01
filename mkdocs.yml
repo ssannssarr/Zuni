@@ -1,0 +1,48 @@
+site_name: Zuni
+site_description: One Command Search
+site_url: https://ssannssarr.github.io/Zuni/
+
+repo_name: ssannssarr/Zuni
+repo_url: https://github.com/ssannssarr/Zuni
+
+theme:
+  name: material
+  font:
+    text: Inter
+    code: JetBrains Mono
+  icon:
+    repo: fontawesome/brands/github
+  palette:
+    scheme: slate
+    primary: black
+    accent: lime
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+    - content.code.annotate
+
+extra_css:
+  - stylesheets/home.css
+
+nav:
+  - Home: index.md
+  - Getting Started:
+      - Installation: getting-started/installation.md
+      - Configuration: getting-started/configuration.md
+  - Guide:
+      - Commands: guide/commands.md
+      - Architecture: guide/architecture.md
+  - Development:
+      - Project Structure: development/project-structure.md
+      - Contributing: development/contributing.md
+  - Roadmap: roadmap.md
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - pymdownx.details
+  - pymdownx.highlight
+  - pymdownx.superfences
