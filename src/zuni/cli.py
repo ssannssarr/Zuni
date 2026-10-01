@@ -4,7 +4,18 @@ from zuni.llm.config import (
     Config
 )
 from zuni.llm.llm import LLM
+from zuni.prompts.prompt import Prompt
+from rich.console import Console
+from rich.markdown import Markdown as md
 import asyncclick as ac
+
+console = Console()
+cnfg = Config()
+llm = LLM(
+    api_key=cnfg["API_KEY"],
+    model=cnfg["MODEL"],
+    base_url=cnfg["BASE_URL"]
+)
 
 
 @ac.group()
@@ -52,8 +63,23 @@ async def ask(
     """
     This method is for asking an question directly from terminal.
     """
-    cnfg = Config()
 
+    prmpt = Prompt()
+    chat = [
+        {
+            "role": "system",
+            "content": prmpt["system"]
+        },
+        {
+            "role": "user",
+            "content": prompt
+        }
+    ]
+
+    res = await llm.ask(chat=chat)
+    msg = res["choices"][0]["message"]["content"]
+
+    console.print(md(msg))
 
 if __name__ == "__main__":
     main()
