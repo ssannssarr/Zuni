@@ -8,7 +8,7 @@ repo_url: https://github.com/ssannssarr/Zuni
 theme:
   name: material
   font:
-    text: Inter
+    text: Space Grotesk
     code: JetBrains Mono
   icon:
     repo: fontawesome/brands/github
@@ -16,6 +16,7 @@ theme:
     scheme: slate
     primary: black
     accent: lime
+
   features:
     - navigation.tabs
     - navigation.sections
@@ -34,10 +35,12 @@ nav:
   - Guide:
       - Commands: guide/commands.md
       - Architecture: guide/architecture.md
+      - Troubleshooting: guide/troubleshooting.md
   - Development:
       - Project Structure: development/project-structure.md
       - Contributing: development/contributing.md
   - Roadmap: roadmap.md
+  - FAQ: faq.md
 
 markdown_extensions:
   - admonition
@@ -46,3 +49,7 @@ markdown_extensions:
   - pymdownx.details
   - pymdownx.highlight
   - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
