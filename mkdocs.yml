@@ -23,6 +23,7 @@ theme:
     - navigation.top
     - content.code.copy
     - content.code.annotate
+    - navigation.footer
 
 extra_css:
   - stylesheets/home.css
@@ -53,3 +54,12 @@ markdown_extensions:
       alternate_style: true
   - pymdownx.tasklist:
       custom_checkbox: true
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/ssannssarr/Zuni
+    - icon: fontawesome/solid/paper-plane
+      link: mailto:ssannssarrai@gmail.com
+    - icon: fontawesome/brands/instagram
+      link: https://instagram.com/ssannssarrai
