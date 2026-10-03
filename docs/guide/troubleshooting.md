@@ -1,56 +1,83 @@
 # Troubleshooting
 
+This page covers common installation, configuration, network, and model issues.
+
 ## `zuni: command not found`
 
-Update uv's shell integration:
+Refresh uv's shell integration:
 
 ```bash
 uv tool update-shell
 ```
 
-Restart the terminal and try again.
+Restart your terminal and try again.
 
-## Configuration file error
+## Configuration file errors
 
-If you see `Configuration File doesn't exists!`, run:
+If Zuni reports that the configuration file does not exist, run:
 
 ```bash
 zuni config
 ```
 
-Zuni stores configuration at `~/.config/zuni/config.json`.
+The default configuration path is:
 
-## API key error
+```text
+~/.config/zuni/config.json
+```
 
-Set the current environment variable:
+## API key errors
+
+You can provide the key through the environment:
 
 ```bash
 export ZUNI_API_KEY="your-api-key"
 ```
 
-or run `zuni config`. The current implementation checks `ZUNI_API_KEY`, not `OPENROUTER_API_KEY`.
+Or run `zuni config`.
+
+The current implementation reads `ZUNI_API_KEY`; it does not use `OPENROUTER_API_KEY` automatically.
 
 ## Authentication errors
 
-For HTTP 401 or 403 responses, verify the API key, provider, and model access.
+For HTTP `401` or `403` responses, check:
+
+- the API key
+- the provider
+- the model ID
+- whether the account has access to the selected model
 
 ## Model or provider errors
 
-Zuni sends requests to `{BASE_URL}/chat/completions`. Check `MODEL` and `BASE_URL` in your configuration.
+Zuni sends requests to:
+
+```text
+{BASE_URL}/chat/completions
+```
+
+Check `MODEL` and `BASE_URL` in your configuration and make sure the provider exposes the expected OpenAI-compatible endpoint.
 
 ## Rate limits
 
-The LLM client retries temporary failures including HTTP 429 and common 5xx responses. If the provider continues returning errors, wait or change models.
+The LLM client retries temporary failures, including HTTP `429` and common `5xx` responses. If the provider continues returning errors, wait and try again or select another model.
 
 ## Connection or timeout errors
 
-Check your internet connection, base URL, provider availability, firewall, and VPN. The LLM client uses a 60-second default timeout and retries temporary failures.
+Check your:
+
+- internet connection
+- base URL
+- provider availability
+- firewall or network restrictions
+- VPN configuration
+
+The LLM client currently uses a 60-second default timeout and retries temporary failures.
 
 ## Web search fails
 
-DuckDuckGo may rate-limit automated requests. If search is unavailable, Zuni can return the tool error to the model or use its search-first fallback when tool calling is unavailable.
+DuckDuckGo can temporarily limit automated requests. If web search fails, Zuni can continue without results or use its search-first fallback when the selected model cannot use tools.
 
-For questions that do not need research:
+For questions that do not require web research:
 
 ```bash
 zuni ask --no-search "Explain recursion"
@@ -58,25 +85,45 @@ zuni ask --no-search "Explain recursion"
 
 ## The model does not support tools
 
-Not every OpenAI-compatible model supports tool calling. When the first tool-enabled request fails, Zuni falls back to:
+Tool calling is not available from every OpenAI-compatible model or provider.
+
+When the first tool-enabled request fails, Zuni falls back to:
 
 ```text
 web search → collect sources → normal LLM request
 ```
 
+This fallback is simpler than the normal agent workflow, but it still gives the model the collected source material.
+
 ## Answers have no citations
 
-Citations depend on the model using the source numbers supplied by Zuni. Check that web research ran and inspect the source list printed below the answer.
+Citations depend on the model using the source numbers provided by Zuni.
 
-Zuni only accepts citation numbers that correspond to collected sources.
+If an answer has no citations:
+
+1. Check that web research actually ran.
+2. Look at the source list printed below the answer.
+3. Check whether the answer contains source references such as `[1]`.
+
+Zuni only displays citation numbers that correspond to collected sources.
 
 ## A page cannot be fetched
 
-Zuni rejects obvious local/private/non-HTTP(S) targets when reading model-selected URLs. Public pages can still fail because of anti-bot protection, authentication, redirects, network errors, or unusual HTML.
+Zuni rejects obvious local, private, or non-HTTP(S) targets when reading model-selected URLs.
+
+A public page can still fail to load because of:
+
+- anti-bot protection
+- authentication requirements
+- redirects
+- network errors
+- unusual or unsupported HTML
 
 ## Python version
 
-Package metadata supports Python 3.11+. The repository currently uses Python 3.14 for development.
+The package supports Python 3.11+. The repository currently uses Python 3.14 for development.
+
+Check your version with:
 
 ```bash
 python --version
@@ -84,12 +131,22 @@ python --version
 
 ## Debug mode
 
-Set `ZUNI_DEBUG` to let unexpected exceptions propagate:
+Set `ZUNI_DEBUG` to allow unexpected exceptions to propagate:
 
 ```bash
 ZUNI_DEBUG=1 zuni ask "your question"
 ```
 
+Use this when you need a traceback for debugging.
+
 ## Still stuck?
 
-Open an issue and include the command, full error, OS, Python version, and relevant configuration with secrets removed. Never post your API key.
+Open an issue with:
+
+- the command you ran
+- the complete error output
+- your OS and Python version
+- your Zuni version or commit
+- relevant configuration with secrets removed
+
+Never include an API key or access token.
