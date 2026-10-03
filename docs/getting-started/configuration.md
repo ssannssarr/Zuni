@@ -1,19 +1,21 @@
 # Configuration
 
-Zuni uses an OpenAI-compatible `/chat/completions` API. OpenRouter is the default base URL when no base URL is supplied.
+Zuni connects to an OpenAI-compatible `/chat/completions` endpoint. The default base URL is OpenRouter when no other base URL is configured.
 
 ## Interactive setup
+
+The simplest way to configure Zuni is:
 
 ```bash
 zuni config
 ```
 
-Zuni asks for three values:
+You will be asked for three values:
 
-| Prompt | Description | Example |
-|--------|-------------|---------|
-| API key | Credential used for the model API | `sk-or-v1-...` |
-| Model ID | Model identifier accepted by your provider | `openrouter/free` |
+| Prompt | Purpose | Example |
+|--------|---------|---------|
+| API key | Credential used to access the model API | `sk-or-v1-...` |
+| Model ID | Model identifier accepted by the provider | `openrouter/free` |
 | Base URL | API root, without `/chat/completions` | `https://openrouter.ai/api/v1` |
 
 The values are saved to:
@@ -22,7 +24,9 @@ The values are saved to:
 ~/.config/zuni/config.json
 ```
 
-## Config file
+## Configuration file
+
+A typical configuration looks like this:
 
 ```json
 {
@@ -31,6 +35,8 @@ The values are saved to:
     "BASE_URL": "https://openrouter.ai/api/v1"
 }
 ```
+
+Keep this file private because it can contain your API key.
 
 ## Environment variables
 
@@ -77,10 +83,7 @@ The values are saved to:
 
 1. `ZUNI_BASE_URL`
 2. `BASE_URL` in `config.json`
-3. OpenRouter's default URL in the LLM client
-
-!!! note
-    Running `zuni config` once is the simplest setup because Zuni reads the model and base URL from the configuration module.
+3. The default URL in the LLM client
 
 ## Provider examples
 
@@ -106,20 +109,22 @@ The values are saved to:
     API key: ollama
     ```
 
-Any provider that accepts the OpenAI-compatible `POST /chat/completions` format can be used. Tool calling additionally depends on model/provider support.
+Zuni can work with providers that implement the OpenAI-compatible `POST /chat/completions` interface. Tool calling also requires support for the `tools` request format.
 
 ## Security
 
 !!! warning
-    Never commit your API key or `config.json` to Git. If a key leaks, revoke it from your provider immediately.
+    Never commit your API key or `config.json` to Git. If an API key is exposed, revoke it through the provider and create a replacement.
 
-On Linux, macOS, and Termux:
+On Linux, macOS, and Termux, you can restrict access to the configuration file:
 
 ```bash
 chmod 600 ~/.config/zuni/config.json
 ```
 
 ## Reset configuration
+
+Remove the configuration file and run setup again:
 
 ```bash
 rm ~/.config/zuni/config.json
