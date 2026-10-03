@@ -1,6 +1,6 @@
 # Architecture
 
-Zuni is an asynchronous CLI built around an OpenAI-compatible LLM client, a small tool-calling agent, and web research tools.
+Zuni is an asynchronous CLI built around four main pieces: an OpenAI-compatible LLM client, a small tool-calling agent, web research tools, and a terminal interface.
 
 ## High-level flow
 
@@ -12,7 +12,7 @@ zuni ask
    │
    ├── --no-search ──► LLM ──► Markdown
    │
-   └── search mode
+   └── research mode
           │
           ▼
        Agent loop
@@ -32,11 +32,13 @@ zuni ask
        Markdown + sources
 ```
 
+The important idea is simple: the model decides when it needs a tool, Zuni executes that tool, and the result is returned to the model as part of the conversation.
+
 ## Main components
 
 ### `cli.py`
 
-The CLI defines commands, loads configuration and prompts, creates the LLM client and Toolbox, selects direct or research mode, handles the no-tool-calling fallback, renders Markdown, and prints sources.
+The CLI defines the commands and coordinates each request. It loads configuration and prompts, creates the LLM client and Toolbox, selects direct or research mode, handles the tool-calling fallback, renders Markdown, and prints sources.
 
 ### `agent.py`
 
@@ -47,24 +49,24 @@ LLM request
     ↓
 assistant message
     ↓
-tool_calls?
+tool calls?
   ├─ no → final answer
   └─ yes
        ↓
 Toolbox.run(...)
        ↓
-tool result appended to chat
+tool result added to chat
        ↓
 LLM request again
 ```
 
-The current agent has a default maximum of four tool-call rounds. When that budget is exhausted, Zuni asks the model to answer using the information gathered so far.
+The current agent allows up to four tool-call rounds by default. If the limit is reached, Zuni asks the model to answer using the information collected so far.
 
-If the first tool-enabled request fails, the CLI treats that as possible lack of tool support and uses the search-first fallback.
+If the first tool-enabled request is rejected, the CLI treats it as a possible tool-support issue and uses the search-first fallback.
 
 ### `llm/llm.py`
 
-The `LLM` class builds OpenAI-compatible chat-completion requests, optionally attaches tool definitions, sends them asynchronously with `httpx`, retries temporary failures, maps API errors, and extracts assistant messages.
+The `LLM` class builds OpenAI-compatible chat-completion requests. It can attach tool definitions, sends requests asynchronously with `httpx`, retries temporary failures, maps API errors, and extracts assistant messages.
 
 Requests are sent to:
 
@@ -74,7 +76,13 @@ Requests are sent to:
 
 ### `llm/config.py`
 
-Configuration lives at `~/.config/zuni/config.json`. The module resolves the API key, model, and base URL from the config file and supported environment variables.
+This module loads and saves Zuni's configuration at:
+
+```text
+~/.config/zuni/config.json
+```
+
+It resolves the API key, model, and base URL from the configuration file and supported environment variables.
 
 ### `tools/schema.py`
 
@@ -82,44 +90,46 @@ This module defines the tool schemas sent to the model.
 
 | Tool | Purpose |
 |------|---------|
-| `web_search` | Search DuckDuckGo and return numbered sources |
-| `extract_markdown` | Download a specific public page and extract readable Markdown |
+| `web_search` | Search DuckDuckGo and return source material |
+| `extract_markdown` | Fetch a public page and extract readable Markdown |
 
 ### `tools/toolbox.py`
 
-`Toolbox` is the execution layer between model tool calls and Python functions. It parses arguments, dispatches tool names, tracks sources, assigns source numbers, and returns tool failures as text.
+`Toolbox` connects model tool calls to their Python implementations. It parses arguments, dispatches tools, tracks sources, assigns source numbers, and turns tool failures into results the model can understand.
 
 ### `tools/web_search.py`
 
-The web-search tool combines DuckDuckGo results with best-effort fetching of the top pages and converts fetched HTML into compact Markdown. Up to three page downloads run concurrently.
+The web-search tool searches DuckDuckGo and can fetch selected result pages to enrich the returned source material. Page downloads are performed concurrently.
 
 ### `search/search.py`
 
-This module handles lower-level HTTP requests, DuckDuckGo HTML parsing, and public URL checks before page fetching.
+This module provides lower-level HTTP requests, DuckDuckGo parsing, and URL checks used before page fetching.
 
 ### `tools/extract_markdown.py`
 
-HTML is cleaned by removing common noise such as scripts, navigation, forms, and iframes. Zuni prefers `article`, `main`, or `body` content and converts it to compact Markdown.
+This module removes common HTML noise such as scripts, navigation, forms, and iframes, then extracts the most relevant page content and converts it to Markdown.
 
 ## Sources and citations
 
-Sources are represented as:
+Zuni represents a source as:
 
 ```text
 Source(index, title, url, content)
 ```
 
-`Toolbox` owns the source list. A source receives a number when first registered. Repeated URLs reuse the existing source number.
+`Toolbox` owns the source list. A source receives a number when it is first registered. Repeated URLs reuse the existing source number.
 
-The final model response can cite sources as `[1]`, `[2]`, and so on. The CLI extracts those references and prints the corresponding URLs below the answer.
+The final model response can contain citations such as `[1]` and `[2]`. The CLI reads those references and prints the matching source URLs below the answer.
 
 ## Direct mode
+
+Use:
 
 ```bash
 zuni ask --no-search "Explain recursion"
 ```
 
-Direct mode skips the agent and tools:
+Direct mode skips the agent and web tools:
 
 ```text
 CLI → system prompt + question → LLM → Markdown
@@ -128,8 +138,8 @@ CLI → system prompt + question → LLM → Markdown
 ## Design goals
 
 - **CLI first:** keep the interface small and terminal-friendly.
-- **Async:** network operations use asynchronous APIs.
-- **Provider neutral:** use the common OpenAI-compatible chat-completions format.
+- **Async:** use asynchronous APIs for network operations.
+- **Provider neutral:** work with the common OpenAI-compatible chat-completions format.
 - **Tool based:** keep web capabilities behind explicit model-callable tools.
-- **Grounded:** preserve source information so answers can cite retrieved material.
+- **Grounded:** retain source information so answers can reference retrieved material.
 - **Small core:** keep the agent and tool layer understandable.
