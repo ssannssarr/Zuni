@@ -1,6 +1,6 @@
 # Commands
 
-Zuni currently exposes two commands:
+Zuni keeps its command-line interface small:
 
 ```bash
 zuni [COMMAND] [ARGUMENTS]
@@ -8,21 +8,21 @@ zuni [COMMAND] [ARGUMENTS]
 
 | Command | Purpose |
 |---------|---------|
-| `zuni ask` | Ask a question and optionally research the web |
-| `zuni config` | Save API key, model, and base URL |
+| `zuni ask` | Ask a question, with optional web research |
+| `zuni config` | Configure the API key, model, and base URL |
 | `zuni --help` | Show command help |
 
 ---
 
 ## `zuni ask`
 
-Ask a question from the terminal.
+Ask a question directly from your terminal:
 
 ```bash
 zuni ask "Explain how DNS works"
 ```
 
-Web research is enabled by default. The agent can decide to use the available tools, then return an answer with cited sources.
+Web research is enabled by default. The model can choose to use Zuni's available tools before producing the answer.
 
 ### Syntax
 
@@ -34,10 +34,10 @@ zuni ask [OPTIONS] PROMPT...
 
 | Option | Description |
 |--------|-------------|
-| `--no-search` | Skip the agent/tool workflow and ask the model directly |
-| `-n, --results INTEGER` | Maximum number of search results to use, from 1 to 10; default: 5 |
+| `--no-search` | Skip the agent and tools and ask the model directly |
+| `-n, --results INTEGER` | Maximum number of search results, from 1 to 10; default: 5 |
 
-The prompt can contain multiple shell arguments. Zuni joins them into one question.
+If the prompt contains multiple shell arguments, Zuni joins them into one question.
 
 ### Examples
 
@@ -55,45 +55,45 @@ The prompt can contain multiple shell arguments. Zuni joins them into one questi
     zuni ask --no-search "Write a Python function that reverses a string"
     ```
 
-=== "Control result count"
+=== "Choose result count"
 
     ```bash
     zuni ask -n 3 "What is quantum computing?"
     zuni ask --results 8 "Compare current Linux distributions"
     ```
 
-### How a researched question works
+### Research flow
 
-1. Zuni loads the system prompt and configuration.
-2. The LLM receives the question plus the available tool definitions.
-3. The model may call `web_search`.
-4. Zuni runs the requested tool and sends the result back to the model.
-5. The model may call `extract_markdown` to read a specific page.
-6. The agent repeats the tool loop until the model answers or the step budget is reached.
-7. Zuni renders the Markdown answer.
-8. Cited sources are printed below the answer.
+For a normal research request:
 
-If the selected model does not support tool calling, Zuni falls back to a simpler flow: search first, then send the collected sources to the model.
+1. Zuni loads the configuration and system prompt.
+2. The LLM receives the question and available tool definitions.
+3. The model can call `web_search`.
+4. Zuni runs the requested tool and returns its result to the model.
+5. The model can call `extract_markdown` when it needs to read a page.
+6. The agent repeats the tool loop until the model answers or the step limit is reached.
+7. Zuni renders the answer as Markdown.
+8. Zuni prints the relevant sources below the answer.
 
-### Sources
+If the selected model cannot use tool calling, Zuni switches to a simpler search-first flow: it collects web results and sends them to the model in a normal request.
 
-When web research is used, Zuni numbers sources:
+### Sources and citations
+
+Web sources are assigned numbers:
 
 ```text
 [1] Source title
 URL: https://example.com/...
-Source content...
 
 [2] Another source
 URL: https://example.org/...
-Source content...
 ```
 
-The model can cite them as `[1]`, `[2]`, etc. Zuni then prints the cited sources at the bottom of the response.
+The model is instructed to cite these numbers inline, for example `[1]`. Zuni then prints the corresponding source URLs below the answer.
 
-### Quoting tips
+### Shell quoting
 
-Quote questions containing shell characters:
+Quote prompts when they contain shell characters such as `$`:
 
 ```bash
 zuni ask 'What does $PATH do?'
@@ -102,13 +102,17 @@ zuni ask "What is Python's GIL?"
 
 ### Save an answer
 
+Redirect the terminal output to a file:
+
 ```bash
 zuni ask "List five Linux commands" > answer.txt
 ```
 
-Terminal Markdown styling is not preserved in redirected output.
+Rich terminal formatting is not preserved in the redirected output.
 
 ### Alias
+
+You can create a short shell alias:
 
 ```bash
 alias z='zuni ask'
@@ -119,17 +123,19 @@ z "What is a mutex?"
 
 ## `zuni config`
 
-Interactively saves configuration:
+Run the interactive configuration command:
 
 ```bash
 zuni config
 ```
 
-See [Configuration](../getting-started/configuration.md) for details.
+It asks for the API key, model ID, and base URL. See [Configuration](../getting-started/configuration.md) for the details.
 
 ---
 
 ## Help
+
+Use the built-in help whenever you need the exact command syntax:
 
 ```bash
 zuni --help
