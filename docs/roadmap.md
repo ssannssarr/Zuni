@@ -1,47 +1,47 @@
 # Roadmap
 
-Zuni is evolving from a small CLI question-answering tool into a compact terminal research assistant.
+Zuni is developing from a small command-line question-answering tool into a compact terminal research assistant.
 
-This roadmap describes the current direction. It is not a fixed release schedule.
+This roadmap describes direction rather than a fixed release schedule. Items can change as the project evolves.
 
 ## Available now
 
-- [x] `zuni ask` for one-command questions
-- [x] `zuni config` for API key, model, and base URL
+- [x] One-command questions with `zuni ask`
+- [x] Interactive configuration with `zuni config`
 - [x] OpenAI-compatible chat-completions support
 - [x] Markdown rendering in the terminal
-- [x] Async HTTP requests
+- [x] Asynchronous HTTP requests
 - [x] Retry handling for temporary LLM API failures
-- [x] Agent/tool-calling loop
+- [x] Tool-calling agent
 - [x] DuckDuckGo web search
 - [x] Web-page extraction to Markdown
 - [x] Numbered source tracking and citations
 - [x] Fallback search flow for models without tool calling
-- [x] `--no-search` direct-answer mode
+- [x] Direct-answer mode with `--no-search`
 
 ## In progress
 
 - [ ] Stronger validation of model-generated tool calls
 - [ ] More robust URL and redirect safety
 - [ ] Automated tests for configuration, tools, citations, and the agent loop
-- [ ] Better documentation and API reference
+- [ ] Expanded documentation and API reference
 
 ## Planned
 
 - [ ] Streaming responses
 - [ ] Conversation mode
 - [ ] Reading input from stdin
-- [ ] Multiple saved profiles
-- [ ] CI pipeline
+- [ ] Multiple saved configuration profiles
+- [ ] Continuous integration
 - [ ] PyPI release
 
 ## Ideas
 
 - Shell completions
-- JSON and other structured output modes
+- JSON and other structured output formats
 - Additional research tools
-- Local/offline-first workflows
+- Local and offline-first workflows
 - More provider-specific configuration options
 
 !!! note
-    The roadmap can change as Zuni's architecture and goals evolve.
+    The roadmap is intentionally flexible. Features may move, change, or be removed as Zuni's design develops.
