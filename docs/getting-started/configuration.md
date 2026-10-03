@@ -1,6 +1,6 @@
 # Configuration
 
-Zuni works with any **OpenAI-compatible** API. OpenRouter is the default.
+Zuni uses an OpenAI-compatible `/chat/completions` API. OpenRouter is the default base URL when no base URL is supplied.
 
 ## Interactive setup
 
@@ -8,20 +8,21 @@ Zuni works with any **OpenAI-compatible** API. OpenRouter is the default.
 zuni config
 ```
 
-| Prompt | What to enter | Example |
-|--------|---------------|---------|
-| API key | Your provider key (hidden while typing) | `sk-or-v1-...` |
-| Model ID | The model you want to use | `openrouter/free` |
-| Base URL | The API root of your provider | `https://openrouter.ai/api/v1` |
+Zuni asks for three values:
+
+| Prompt | Description | Example |
+|--------|-------------|---------|
+| API key | Credential used for the model API | `sk-or-v1-...` |
+| Model ID | Model identifier accepted by your provider | `openrouter/free` |
+| Base URL | API root, without `/chat/completions` | `https://openrouter.ai/api/v1` |
+
+The values are saved to:
+
+```text
+~/.config/zuni/config.json
+```
 
 ## Config file
-
-Settings are stored here:
-
-| OS | Path |
-|----|------|
-| Linux / macOS / Termux | `~/.config/zuni/config.json` |
-| Windows | `C:\Users\<you>\.config\zuni\config.json` |
 
 ```json
 {
@@ -31,48 +32,55 @@ Settings are stored here:
 }
 ```
 
-You can edit this file by hand at any time.
-
 ## Environment variables
 
-| Variable | Overrides | Required |
-|----------|-----------|----------|
-| `OPENROUTER_API_KEY` | `API_KEY` in the config file | No |
-| `ZUNI_BASE_URL` | `BASE_URL` in the config file | No |
+| Variable | Purpose |
+|----------|---------|
+| `ZUNI_API_KEY` | Overrides `API_KEY` from the config file |
+| `ZUNI_BASE_URL` | Overrides `BASE_URL` from the config file |
 
 === "Bash / Zsh"
 
     ```bash
-    export OPENROUTER_API_KEY="your-api-key"
+    export ZUNI_API_KEY="your-api-key"
     export ZUNI_BASE_URL="https://openrouter.ai/api/v1"
     ```
 
 === "Fish"
 
     ```fish
-    set -Ux OPENROUTER_API_KEY "your-api-key"
+    set -Ux ZUNI_API_KEY "your-api-key"
     set -Ux ZUNI_BASE_URL "https://openrouter.ai/api/v1"
     ```
 
 === "PowerShell"
 
     ```powershell
-    $env:OPENROUTER_API_KEY = "your-api-key"
+    $env:ZUNI_API_KEY = "your-api-key"
     $env:ZUNI_BASE_URL = "https://openrouter.ai/api/v1"
     ```
 
-Add the export line to `~/.bashrc` or `~/.zshrc` to make it permanent.
+## Resolution order
 
-## How values are resolved
+### API key
 
-| Value | 1st choice | 2nd choice | Fallback |
-|-------|-----------|------------|----------|
-| API key | `OPENROUTER_API_KEY` | config file | error |
-| Model | config file | none | `openrouter/free` |
-| Base URL | `ZUNI_BASE_URL` | config file | none |
+1. `ZUNI_API_KEY`
+2. `API_KEY` in `config.json`
+3. Error
+
+### Model
+
+1. `MODEL` in `config.json`
+2. `openrouter/free`
+
+### Base URL
+
+1. `ZUNI_BASE_URL`
+2. `BASE_URL` in `config.json`
+3. OpenRouter's default URL in the LLM client
 
 !!! note
-    The config file should exist even if you use environment variables, because the model is always read from it. Run `zuni config` once to create it.
+    Running `zuni config` once is the simplest setup because Zuni reads the model and base URL from the configuration module.
 
 ## Provider examples
 
@@ -87,31 +95,31 @@ Add the export line to `~/.bashrc` or `~/.zshrc` to make it permanent.
 
     ```text
     Base URL: https://api.openai.com/v1
-    Model ID: gpt-4o-mini
+    Model ID: <your-model>
     ```
 
-=== "Local (Ollama)"
+=== "Local Ollama"
 
     ```text
     Base URL: http://localhost:11434/v1
-    Model ID: llama3.2
-    API key:  ollama   (any non-empty value)
+    Model ID: <your-model>
+    API key: ollama
     ```
 
-Any provider that supports `POST /chat/completions` will work.
+Any provider that accepts the OpenAI-compatible `POST /chat/completions` format can be used. Tool calling additionally depends on model/provider support.
 
 ## Security
 
 !!! warning
-    Never commit your API key or `config.json` to Git. If a key leaks, revoke it from your provider dashboard immediately.
+    Never commit your API key or `config.json` to Git. If a key leaks, revoke it from your provider immediately.
 
-Tighten file permissions on Linux, macOS and Termux:
+On Linux, macOS, and Termux:
 
 ```bash
 chmod 600 ~/.config/zuni/config.json
 ```
 
-## Reset
+## Reset configuration
 
 ```bash
 rm ~/.config/zuni/config.json
