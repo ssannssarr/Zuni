@@ -1,27 +1,36 @@
 # Roadmap
 
-Zuni is early and evolving. This page shows where it stands and where it is heading.
+Zuni is evolving from a small CLI question-answering tool into a compact terminal research assistant.
+
+This roadmap describes the current direction. It is not a fixed release schedule.
 
 ## Available now
 
 - [x] `zuni ask` for one-command questions
-- [x] `zuni config` for API key, model and base URL
-- [x] OpenAI-compatible provider support
+- [x] `zuni config` for API key, model, and base URL
+- [x] OpenAI-compatible chat-completions support
 - [x] Markdown rendering in the terminal
-- [x] Config file and environment variable support
+- [x] Async HTTP requests
+- [x] Retry handling for temporary LLM API failures
+- [x] Agent/tool-calling loop
+- [x] DuckDuckGo web search
+- [x] Web-page extraction to Markdown
+- [x] Numbered source tracking and citations
+- [x] Fallback search flow for models without tool calling
+- [x] `--no-search` direct-answer mode
 
-## Next
+## In progress
 
-- [ ] Clear error messages for API and network failures
-- [ ] Graceful handling of a missing config file
+- [ ] Stronger validation of model-generated tool calls
+- [ ] More robust URL and redirect safety
+- [ ] Automated tests for configuration, tools, citations, and the agent loop
+- [ ] Better documentation and API reference
+
+## Planned
+
 - [ ] Streaming responses
-- [ ] Tests for config and LLM modules
-
-## Later
-
-- [ ] Web search with cited sources
-- [ ] Conversation mode for follow-up questions
-- [ ] Reading from stdin (`cat file | zuni ask`)
+- [ ] Conversation mode
+- [ ] Reading input from stdin
 - [ ] Multiple saved profiles
 - [ ] CI pipeline
 - [ ] PyPI release
@@ -29,8 +38,10 @@ Zuni is early and evolving. This page shows where it stands and where it is head
 ## Ideas
 
 - Shell completions
-- Output formats (plain, JSON)
-- Offline-first mode with local models
+- JSON and other structured output modes
+- Additional research tools
+- Local/offline-first workflows
+- More provider-specific configuration options
 
 !!! note
-    Plans may change. Open an issue to suggest or vote on ideas.
+    The roadmap can change as Zuni's architecture and goals evolve.
