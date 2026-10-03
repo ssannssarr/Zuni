@@ -1,8 +1,10 @@
 # Contributing
 
-Contributions are welcome across code, documentation, bug fixes, and ideas.
+Contributions are welcome in code, documentation, bug fixes, testing, and project ideas.
 
 ## Development setup
+
+Clone the repository and install its development dependencies:
 
 ```bash
 git clone https://github.com/ssannssarr/Zuni.git
@@ -19,27 +21,35 @@ uv tool install --editable .
 
 ## Preview the documentation
 
+Start the local MkDocs server:
+
 ```bash
 uv run mkdocs serve
 ```
 
+Open the local address shown by MkDocs and check both the homepage and regular documentation pages.
+
 ## Workflow
+
+A typical contribution looks like this:
 
 1. Fork the repository.
 2. Create a focused branch.
 3. Make the change.
-4. Run relevant commands locally.
+4. Run the relevant commands locally.
 5. Update documentation when behavior changes.
-6. Commit with a clear message.
-7. Push and open a pull request.
+6. Commit the change with a clear message.
+7. Push the branch and open a pull request.
 
-Example branch:
+For example:
 
 ```bash
 git checkout -b feature/my-change
 ```
 
 ## Commit messages
+
+Keep commit messages short and descriptive:
 
 ```text
 feat: add streaming responses
@@ -52,49 +62,60 @@ refactor: simplify tool dispatch
 |--------|---------|
 | `feat` | New features |
 | `fix` | Bug fixes |
-| `docs` | Documentation |
+| `docs` | Documentation changes |
 | `refactor` | Internal restructuring |
 
 ## Code guidelines
 
-- Keep functions focused.
-- Use type hints.
-- Prefer async APIs for network operations.
-- Keep user-facing errors understandable.
-- Do not commit API keys or local configuration files.
-- Be careful when changing model-controlled network access.
+- Keep functions focused and easy to follow.
+- Use type hints where practical.
+- Prefer asynchronous APIs for network operations.
+- Keep user-facing errors clear and actionable.
+- Never commit API keys or local configuration files.
+- Treat model-controlled network access as untrusted input.
 
 ## Tool and web-search changes
 
 When modifying a tool:
 
-- keep its schema and implementation consistent
+- keep its schema and implementation in sync
 - validate required arguments
 - preserve useful error messages
 - avoid exposing secrets in tool output
 - consider URL and redirect safety
-- update the architecture documentation
+- update the architecture documentation when behavior changes
 
 ## Documentation guidelines
 
-- Document current behavior, not planned behavior.
+Documentation should describe the current implementation.
+
 - Keep examples runnable.
-- Keep pages short and scannable.
+- Prefer short sections and clear headings.
+- Explain behavior before implementation details.
 - Update links when pages move.
 - Keep architecture documentation synchronized with the code.
+- Avoid presenting planned features as if they already exist.
 
-## Useful contribution areas
+## Areas for contribution
 
-Current areas that can use work include stronger agent tests, configuration handling, URL safety, error handling, documentation, CI, and packaging.
+Some useful areas include:
+
+- agent and tool tests
+- configuration handling
+- URL safety
+- error handling
+- documentation
+- CI
+- packaging
 
 ## Reporting a bug
 
-Open an issue and include:
+When opening an issue, include:
 
-- command you ran
-- full error output
-- OS and Python version
-- Zuni version or commit
+- the command you ran
+- the complete error output
+- your OS and Python version
+- your Zuni version or commit
 - relevant configuration with secrets removed
 
 !!! warning
