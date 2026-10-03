@@ -25,7 +25,7 @@ def api_key() -> str:
     """
 
     # This is for checking value in user's local Environment
-    key = os.getenv("OPENROUTER_API_KEY")
+    key = os.getenv("ZUNI_API_KEY")
     if key:
         return key
 
