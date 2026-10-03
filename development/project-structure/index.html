@@ -764,10 +764,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#key-files" class="md-nav__link">
+  <a href="#core-modules" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Key files
+        Core modules
       
     </span>
   </a>
@@ -775,10 +775,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#pyprojecttoml-at-a-glance" class="md-nav__link">
+  <a href="#packaging" class="md-nav__link">
     <span class="md-ellipsis">
       
-        pyproject.toml at a glance
+        Packaging
       
     </span>
   </a>
@@ -786,10 +786,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#tooling" class="md-nav__link">
+  <a href="#adding-or-changing-a-command" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Tooling
+        Adding or changing a command
       
     </span>
   </a>
@@ -797,10 +797,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#adding-a-new-command" class="md-nav__link">
+  <a href="#adding-a-tool" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Adding a new command
+        Adding a tool
       
     </span>
   </a>
@@ -808,10 +808,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#adding-a-new-prompt" class="md-nav__link">
+  <a href="#documentation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Adding a new prompt
+        Documentation
       
     </span>
   </a>
@@ -943,10 +943,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#key-files" class="md-nav__link">
+  <a href="#core-modules" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Key files
+        Core modules
       
     </span>
   </a>
@@ -954,10 +954,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#pyprojecttoml-at-a-glance" class="md-nav__link">
+  <a href="#packaging" class="md-nav__link">
     <span class="md-ellipsis">
       
-        pyproject.toml at a glance
+        Packaging
       
     </span>
   </a>
@@ -965,10 +965,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#tooling" class="md-nav__link">
+  <a href="#adding-or-changing-a-command" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Tooling
+        Adding or changing a command
       
     </span>
   </a>
@@ -976,10 +976,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#adding-a-new-command" class="md-nav__link">
+  <a href="#adding-a-tool" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Adding a new command
+        Adding a tool
       
     </span>
   </a>
@@ -987,10 +987,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#adding-a-new-prompt" class="md-nav__link">
+  <a href="#documentation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Adding a new prompt
+        Documentation
       
     </span>
   </a>
@@ -1018,6 +1018,7 @@
 
 
 <h1 id="project-structure">Project Structure</h1>
+<p>The repository separates the CLI, LLM client, agent, search layer, tools, prompts, and documentation.</p>
 <div class="highlight"><pre><span></span><code>Zuni/
 ├── README.md
 ├── LICENSE
@@ -1027,42 +1028,59 @@
 ├── docs/
 │   ├── index.md
 │   ├── roadmap.md
-│   ├── stylesheets/home.css
+│   ├── stylesheets/
+│   │   └── home.css
 │   ├── getting-started/
+│   │   ├── installation.md
+│   │   └── configuration.md
 │   ├── guide/
+│   │   ├── commands.md
+│   │   ├── architecture.md
+│   │   └── troubleshooting.md
 │   └── development/
+│       ├── project-structure.md
+│       └── contributing.md
 └── src/
     └── zuni/
         ├── __init__.py
         ├── cli.py
+        ├── agent.py
+        ├── errors.py
         ├── llm/
         │   ├── __init__.py
         │   ├── config.py
         │   └── llm.py
-        └── prompts/
-            ├── prompt.py
-            └── system.md
+        ├── prompts/
+        │   ├── prompt.py
+        │   └── system.md
+        ├── search/
+        │   └── search.py
+        └── tools/
+            ├── schema.py
+            ├── toolbox.py
+            ├── web_search.py
+            └── extract_markdown.py
 </code></pre></div>
-<h2 id="key-files">Key files</h2>
+<h2 id="core-modules">Core modules</h2>
 <table>
 <thead>
 <tr>
-<th>File</th>
+<th>Path</th>
 <th>Purpose</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>pyproject.toml</code></td>
-<td>Metadata, dependencies and the <code>zuni</code> script entry</td>
-</tr>
-<tr>
-<td><code>.python-version</code></td>
-<td>Python version used by uv (<code>3.14</code>)</td>
-</tr>
-<tr>
 <td><code>src/zuni/cli.py</code></td>
-<td>CLI commands</td>
+<td>CLI commands, execution flow, and output rendering</td>
+</tr>
+<tr>
+<td><code>src/zuni/agent.py</code></td>
+<td>Tool-calling loop</td>
+</tr>
+<tr>
+<td><code>src/zuni/errors.py</code></td>
+<td>Zuni exception types</td>
 </tr>
 <tr>
 <td><code>src/zuni/llm/config.py</code></td>
@@ -1070,94 +1088,64 @@
 </tr>
 <tr>
 <td><code>src/zuni/llm/llm.py</code></td>
-<td>API client</td>
+<td>OpenAI-compatible API client</td>
+</tr>
+<tr>
+<td><code>src/zuni/prompts/prompt.py</code></td>
+<td>Prompt loading</td>
 </tr>
 <tr>
 <td><code>src/zuni/prompts/system.md</code></td>
-<td>System prompt</td>
+<td>Base system prompt</td>
 </tr>
 <tr>
-<td><code>mkdocs.yml</code></td>
-<td>Documentation site settings</td>
+<td><code>src/zuni/search/search.py</code></td>
+<td>HTTP requests and DuckDuckGo parsing</td>
 </tr>
 <tr>
-<td><code>docs/stylesheets/home.css</code></td>
-<td>Home page styling</td>
+<td><code>src/zuni/tools/schema.py</code></td>
+<td>Tool definitions sent to the model</td>
+</tr>
+<tr>
+<td><code>src/zuni/tools/toolbox.py</code></td>
+<td>Tool dispatch and source tracking</td>
+</tr>
+<tr>
+<td><code>src/zuni/tools/web_search.py</code></td>
+<td>Search plus page enrichment</td>
+</tr>
+<tr>
+<td><code>src/zuni/tools/extract_markdown.py</code></td>
+<td>HTML-to-Markdown extraction</td>
 </tr>
 </tbody>
 </table>
-<h2 id="pyprojecttoml-at-a-glance"><code>pyproject.toml</code> at a glance</h2>
-<div class="highlight"><pre><span></span><code><span class="k">[project]</span>
-<span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"zuni"</span>
-<span class="n">requires-python</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"&gt;=3.14"</span>
-
-<span class="k">[project.scripts]</span>
+<h2 id="packaging">Packaging</h2>
+<p><code>pyproject.toml</code> contains package metadata, runtime dependencies, the Python requirement, and the <code>zuni</code> console-script entry point:</p>
+<div class="highlight"><pre><span></span><code><span class="k">[project.scripts]</span>
 <span class="n">zuni</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"zuni.cli:main"</span>
-
-<span class="k">[build-system]</span>
-<span class="n">build-backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"uv_build"</span>
 </code></pre></div>
-<p>The <code>zuni</code> command points to the <code>main</code> group in <code>zuni/cli.py</code>.</p>
-<h2 id="tooling">Tooling</h2>
-<table>
-<thead>
-<tr>
-<th>Area</th>
-<th>Tool</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Build backend</td>
-<td><code>uv_build</code></td>
-</tr>
-<tr>
-<td>Package manager</td>
-<td><code>uv</code></td>
-</tr>
-<tr>
-<td>Python</td>
-<td>3.14</td>
-</tr>
-<tr>
-<td>Docs</td>
-<td>MkDocs Material (dev dependency)</td>
-</tr>
-<tr>
-<td>License</td>
-<td>MIT</td>
-</tr>
-</tbody>
-</table>
-<h2 id="adding-a-new-command">Adding a new command</h2>
+<p>The repository's <code>.python-version</code> currently uses Python 3.14 for development, while package metadata supports Python 3.11+.</p>
+<h2 id="adding-or-changing-a-command">Adding or changing a command</h2>
 <ol>
-<li>Open <code>src/zuni/cli.py</code></li>
-<li>
-<p>Add a function under the <code>main</code> group:</p>
-<div class="highlight"><pre><span></span><code><span class="nd">@main</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
-<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">hello</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">"""Say hello."""</span>
-    <span class="n">ac</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s2">"Hello from Zuni!"</span><span class="p">)</span>
-</code></pre></div>
-</li>
-<li>
-<p>Run <code>uv run zuni hello</code></p>
-</li>
-<li>Document it in <code>docs/guide/commands.md</code></li>
+<li>Update the command in <code>src/zuni/cli.py</code>.</li>
+<li>Test it with <code>uv run zuni ...</code>.</li>
+<li>Update <a href="../../guide/commands/">Commands</a>.</li>
+<li>Update architecture documentation if the execution flow changed.</li>
 </ol>
-<h2 id="adding-a-new-prompt">Adding a new prompt</h2>
+<h2 id="adding-a-tool">Adding a tool</h2>
+<p>A tool has three important pieces:</p>
 <ol>
-<li>Create <code>src/zuni/prompts/my_prompt.md</code></li>
-<li>
-<p>Register it in <code>prompt.py</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">Prompt</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-    <span class="k">return</span> <span class="p">{</span>
-        <span class="s2">"system"</span><span class="p">:</span> <span class="n">extract_prompt</span><span class="p">(</span><span class="s2">"system.md"</span><span class="p">),</span>
-        <span class="s2">"my_prompt"</span><span class="p">:</span> <span class="n">extract_prompt</span><span class="p">(</span><span class="s2">"my_prompt.md"</span><span class="p">),</span>
-    <span class="p">}</span>
-</code></pre></div>
-</li>
+<li>Schema in <code>src/zuni/tools/schema.py</code>.</li>
+<li>Execution in <code>src/zuni/tools/toolbox.py</code>.</li>
+<li>Implementation in the relevant search/tool module.</li>
 </ol>
+<p>The schema name and dispatcher name must match.</p>
+<h2 id="documentation">Documentation</h2>
+<p>Run the local documentation server with:</p>
+<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>run<span class="w"> </span>mkdocs<span class="w"> </span>serve
+</code></pre></div>
+<p>When code behavior changes, update the corresponding documentation page in the same change whenever possible.</p>
 
 
 

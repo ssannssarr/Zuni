@@ -7,11 +7,6 @@
   --zuni-accent: #b8ff5a;
 }
 
-.md-content__inner {
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
 /* ---------- Hero ---------- */
 .zuni-hero {
   min-height: 650px;
@@ -356,6 +351,11 @@
 
 .md-content:has(.zuni-hero) {
   max-width: none;
+}
+
+.md-content__inner:has(.zuni-hero) {
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .md-content__inner:has(.zuni-hero)::before {

@@ -567,13 +567,52 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#how-values-are-resolved" class="md-nav__link">
+  <a href="#resolution-order" class="md-nav__link">
     <span class="md-ellipsis">
       
-        How values are resolved
+        Resolution order
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Resolution order">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API key
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#base-url" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Base URL
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -600,10 +639,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#reset" class="md-nav__link">
+  <a href="#reset-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Reset
+        Reset configuration
       
     </span>
   </a>
@@ -998,13 +1037,52 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#how-values-are-resolved" class="md-nav__link">
+  <a href="#resolution-order" class="md-nav__link">
     <span class="md-ellipsis">
       
-        How values are resolved
+        Resolution order
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Resolution order">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API key
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#base-url" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Base URL
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1031,10 +1109,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#reset" class="md-nav__link">
+  <a href="#reset-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Reset
+        Reset configuration
       
     </span>
   </a>
@@ -1062,142 +1140,109 @@
 
 
 <h1 id="configuration">Configuration</h1>
-<p>Zuni works with any <strong>OpenAI-compatible</strong> API. OpenRouter is the default.</p>
+<p>Zuni uses an OpenAI-compatible <code>/chat/completions</code> API. OpenRouter is the default base URL when no base URL is supplied.</p>
 <h2 id="interactive-setup">Interactive setup</h2>
 <div class="highlight"><pre><span></span><code>zuni<span class="w"> </span>config
 </code></pre></div>
+<p>Zuni asks for three values:</p>
 <table>
 <thead>
 <tr>
 <th>Prompt</th>
-<th>What to enter</th>
+<th>Description</th>
 <th>Example</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>API key</td>
-<td>Your provider key (hidden while typing)</td>
+<td>Credential used for the model API</td>
 <td><code>sk-or-v1-...</code></td>
 </tr>
 <tr>
 <td>Model ID</td>
-<td>The model you want to use</td>
+<td>Model identifier accepted by your provider</td>
 <td><code>openrouter/free</code></td>
 </tr>
 <tr>
 <td>Base URL</td>
-<td>The API root of your provider</td>
+<td>API root, without <code>/chat/completions</code></td>
 <td><code>https://openrouter.ai/api/v1</code></td>
 </tr>
 </tbody>
 </table>
+<p>The values are saved to:</p>
+<div class="highlight"><pre><span></span><code>~/.config/zuni/config.json
+</code></pre></div>
 <h2 id="config-file">Config file</h2>
-<p>Settings are stored here:</p>
-<table>
-<thead>
-<tr>
-<th>OS</th>
-<th>Path</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Linux / macOS / Termux</td>
-<td><code>~/.config/zuni/config.json</code></td>
-</tr>
-<tr>
-<td>Windows</td>
-<td><code>C:\Users\&lt;you&gt;\.config\zuni\config.json</code></td>
-</tr>
-</tbody>
-</table>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
 <span class="w">    </span><span class="nt">"API_KEY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"your-api-key"</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">"MODEL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"openrouter/free"</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">"BASE_URL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://openrouter.ai/api/v1"</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>You can edit this file by hand at any time.</p>
 <h2 id="environment-variables">Environment variables</h2>
 <table>
 <thead>
 <tr>
 <th>Variable</th>
-<th>Overrides</th>
-<th>Required</th>
+<th>Purpose</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>OPENROUTER_API_KEY</code></td>
-<td><code>API_KEY</code> in the config file</td>
-<td>No</td>
+<td><code>ZUNI_API_KEY</code></td>
+<td>Overrides <code>API_KEY</code> from the config file</td>
 </tr>
 <tr>
 <td><code>ZUNI_BASE_URL</code></td>
-<td><code>BASE_URL</code> in the config file</td>
-<td>No</td>
+<td>Overrides <code>BASE_URL</code> from the config file</td>
 </tr>
 </tbody>
 </table>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Bash / Zsh</label><label for="__tabbed_1_2">Fish</label><label for="__tabbed_1_3">PowerShell</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">OPENROUTER_API_KEY</span><span class="o">=</span><span class="s2">"your-api-key"</span>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">ZUNI_API_KEY</span><span class="o">=</span><span class="s2">"your-api-key"</span>
 <span class="nb">export</span><span class="w"> </span><span class="nv">ZUNI_BASE_URL</span><span class="o">=</span><span class="s2">"https://openrouter.ai/api/v1"</span>
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="k">set</span> -Ux OPENROUTER_API_KEY <span class="s2">"your-api-key"</span>
+<div class="highlight"><pre><span></span><code><span class="k">set</span> -Ux ZUNI_API_KEY <span class="s2">"your-api-key"</span>
 <span class="k">set</span> -Ux ZUNI_BASE_URL <span class="s2">"https://openrouter.ai/api/v1"</span>
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="nv">$env:OPENROUTER_API_KEY</span> <span class="p">=</span> <span class="s2">"your-api-key"</span>
+<div class="highlight"><pre><span></span><code><span class="nv">$env:ZUNI_API_KEY</span> <span class="p">=</span> <span class="s2">"your-api-key"</span>
 <span class="nv">$env:ZUNI_BASE_URL</span> <span class="p">=</span> <span class="s2">"https://openrouter.ai/api/v1"</span>
 </code></pre></div>
 </div>
 </div>
 </div>
-<p>Add the export line to <code>~/.bashrc</code> or <code>~/.zshrc</code> to make it permanent.</p>
-<h2 id="how-values-are-resolved">How values are resolved</h2>
-<table>
-<thead>
-<tr>
-<th>Value</th>
-<th>1st choice</th>
-<th>2nd choice</th>
-<th>Fallback</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>API key</td>
-<td><code>OPENROUTER_API_KEY</code></td>
-<td>config file</td>
-<td>error</td>
-</tr>
-<tr>
-<td>Model</td>
-<td>config file</td>
-<td>none</td>
-<td><code>openrouter/free</code></td>
-</tr>
-<tr>
-<td>Base URL</td>
-<td><code>ZUNI_BASE_URL</code></td>
-<td>config file</td>
-<td>none</td>
-</tr>
-</tbody>
-</table>
+<h2 id="resolution-order">Resolution order</h2>
+<h3 id="api-key">API key</h3>
+<ol>
+<li><code>ZUNI_API_KEY</code></li>
+<li><code>API_KEY</code> in <code>config.json</code></li>
+<li>Error</li>
+</ol>
+<h3 id="model">Model</h3>
+<ol>
+<li><code>MODEL</code> in <code>config.json</code></li>
+<li><code>openrouter/free</code></li>
+</ol>
+<h3 id="base-url">Base URL</h3>
+<ol>
+<li><code>ZUNI_BASE_URL</code></li>
+<li><code>BASE_URL</code> in <code>config.json</code></li>
+<li>OpenRouter's default URL in the LLM client</li>
+</ol>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The config file should exist even if you use environment variables, because the model is always read from it. Run <code>zuni config</code> once to create it.</p>
+<p>Running <code>zuni config</code> once is the simplest setup because Zuni reads the model and base URL from the configuration module.</p>
 </div>
 <h2 id="provider-examples">Provider examples</h2>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">OpenRouter</label><label for="__tabbed_2_2">OpenAI</label><label for="__tabbed_2_3">Local (Ollama)</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">OpenRouter</label><label for="__tabbed_2_2">OpenAI</label><label for="__tabbed_2_3">Local Ollama</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code>Base URL: https://openrouter.ai/api/v1
@@ -1206,27 +1251,27 @@ Model ID: openrouter/free
 </div>
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code>Base URL: https://api.openai.com/v1
-Model ID: gpt-4o-mini
+Model ID: &lt;your-model&gt;
 </code></pre></div>
 </div>
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code>Base URL: http://localhost:11434/v1
-Model ID: llama3.2
-API key:  ollama   (any non-empty value)
+Model ID: &lt;your-model&gt;
+API key: ollama
 </code></pre></div>
 </div>
 </div>
 </div>
-<p>Any provider that supports <code>POST /chat/completions</code> will work.</p>
+<p>Any provider that accepts the OpenAI-compatible <code>POST /chat/completions</code> format can be used. Tool calling additionally depends on model/provider support.</p>
 <h2 id="security">Security</h2>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Never commit your API key or <code>config.json</code> to Git. If a key leaks, revoke it from your provider dashboard immediately.</p>
+<p>Never commit your API key or <code>config.json</code> to Git. If a key leaks, revoke it from your provider immediately.</p>
 </div>
-<p>Tighten file permissions on Linux, macOS and Termux:</p>
+<p>On Linux, macOS, and Termux:</p>
 <div class="highlight"><pre><span></span><code>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>~/.config/zuni/config.json
 </code></pre></div>
-<h2 id="reset">Reset</h2>
+<h2 id="reset-configuration">Reset configuration</h2>
 <div class="highlight"><pre><span></span><code>rm<span class="w"> </span>~/.config/zuni/config.json
 zuni<span class="w"> </span>config
 </code></pre></div>
