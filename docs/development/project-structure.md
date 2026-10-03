@@ -1,6 +1,6 @@
 # Project Structure
 
-The repository separates the CLI, LLM client, agent, search layer, tools, prompts, and documentation.
+Zuni keeps its main responsibilities separated across the CLI, LLM client, agent, search layer, tools, prompts, and documentation.
 
 ```text
 Zuni/
@@ -48,9 +48,9 @@ Zuni/
 
 ## Core modules
 
-| Path | Purpose |
-|------|---------|
-| `src/zuni/cli.py` | CLI commands, execution flow, and output rendering |
+| Path | Responsibility |
+|------|----------------|
+| `src/zuni/cli.py` | CLI commands, execution flow, and terminal output |
 | `src/zuni/agent.py` | Tool-calling loop |
 | `src/zuni/errors.py` | Zuni exception types |
 | `src/zuni/llm/config.py` | Configuration loading and saving |
@@ -60,43 +60,45 @@ Zuni/
 | `src/zuni/search/search.py` | HTTP requests and DuckDuckGo parsing |
 | `src/zuni/tools/schema.py` | Tool definitions sent to the model |
 | `src/zuni/tools/toolbox.py` | Tool dispatch and source tracking |
-| `src/zuni/tools/web_search.py` | Search plus page enrichment |
+| `src/zuni/tools/web_search.py` | Search and page enrichment |
 | `src/zuni/tools/extract_markdown.py` | HTML-to-Markdown extraction |
 
 ## Packaging
 
-`pyproject.toml` contains package metadata, runtime dependencies, the Python requirement, and the `zuni` console-script entry point:
+`pyproject.toml` contains the package metadata, runtime dependencies, Python requirement, and console-script entry point:
 
 ```toml
 [project.scripts]
 zuni = "zuni.cli:main"
 ```
 
-The repository's `.python-version` currently uses Python 3.14 for development, while package metadata supports Python 3.11+.
+The repository uses Python 3.14 for development, while the package metadata supports Python 3.11 and newer.
 
-## Adding or changing a command
+## Changing a command
 
-1. Update the command in `src/zuni/cli.py`.
+When adding or changing a command:
+
+1. Update `src/zuni/cli.py`.
 2. Test it with `uv run zuni ...`.
 3. Update [Commands](../guide/commands.md).
-4. Update architecture documentation if the execution flow changed.
+4. Update the architecture page if the execution flow changes.
 
 ## Adding a tool
 
-A tool has three important pieces:
+A tool has three main parts:
 
-1. Schema in `src/zuni/tools/schema.py`.
-2. Execution in `src/zuni/tools/toolbox.py`.
-3. Implementation in the relevant search/tool module.
+1. A schema in `src/zuni/tools/schema.py`.
+2. Dispatch logic in `src/zuni/tools/toolbox.py`.
+3. The implementation in the relevant search or tool module.
 
-The schema name and dispatcher name must match.
+The schema name and dispatcher name must remain consistent.
 
 ## Documentation
 
-Run the local documentation server with:
+Preview the documentation locally with:
 
 ```bash
 uv run mkdocs serve
 ```
 
-When code behavior changes, update the corresponding documentation page in the same change whenever possible.
+When code behavior changes, update the corresponding documentation page in the same change whenever practical.
