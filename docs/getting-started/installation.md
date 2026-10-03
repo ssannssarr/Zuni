@@ -1,17 +1,19 @@
 # Installation
 
-Get Zuni running in under a minute.
+Get Zuni running in a few steps.
 
 ## Requirements
 
 | Requirement | Version | Notes |
 |-------------|---------|-------|
-| Python | 3.14 or newer | Check with `python --version` |
-| uv | latest | Fast Python package and tool manager |
-| API key | any | OpenRouter or any OpenAI-compatible provider |
-| Internet | required | Zuni calls a hosted model |
+| Python | 3.11+ | Declared package requirement |
+| uv | latest | Recommended package and tool manager |
+| API key | provider-dependent | Required for hosted model APIs |
+| Internet | required for web research | Direct local-model mode can avoid web access |
 
-## 1. Install uv
+The repository currently uses Python 3.14 for development through `.python-version`.
+
+## Install uv
 
 === "Linux / macOS"
 
@@ -31,39 +33,35 @@ Get Zuni running in under a minute.
     pip install uv
     ```
 
-Restart your terminal, then confirm:
+Verify:
 
 ```bash
 uv --version
 ```
 
-## 2. Install Zuni
+## Install Zuni
 
 ```bash
 uv tool install git+https://github.com/ssannssarr/Zuni
 ```
 
-This installs `zuni` in its own isolated environment and puts the command on your `PATH`.
-
-## 3. Verify
+Then:
 
 ```bash
 zuni --help
 ```
 
-You should see the `ask` and `config` commands listed.
+You should see the `ask` and `config` commands.
 
-## 4. Configure
+## Configure
 
 ```bash
 zuni config
 ```
 
-Continue with [Configuration](configuration.md).
+Zuni asks for an API key, model ID, and base URL. Continue with [Configuration](configuration.md).
 
 ## Install from source
-
-Use this if you want to edit the code.
 
 ```bash
 git clone https://github.com/ssannssarr/Zuni.git
@@ -73,27 +71,39 @@ uv run zuni --help
 ```
 
 !!! tip
-    Run `uv tool install --editable .` inside the repo to get a global `zuni` command that reflects your local changes.
+    Run `uv tool install --editable .` inside the repository if you want a global `zuni` command that follows local source changes.
 
 ## Update
 
+Tool installation:
+
 ```bash
 uv tool upgrade zuni
+```
+
+Source checkout:
+
+```bash
+git pull
+uv sync
 ```
 
 ## Uninstall
 
 ```bash
 uv tool uninstall zuni
-rm -rf ~/.config/zuni   # optional: remove saved configuration
+```
+
+Optionally remove local configuration:
+
+```bash
+rm -rf ~/.config/zuni
 ```
 
 ## If the command is not found
-
-Make sure uv's tool directory is on your `PATH`:
 
 ```bash
 uv tool update-shell
 ```
 
-Then restart your terminal. More fixes are in [Troubleshooting](../guide/troubleshooting.md).
+Restart your terminal. More fixes are in [Troubleshooting](../guide/troubleshooting.md).
