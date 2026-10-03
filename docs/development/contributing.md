@@ -1,8 +1,8 @@
 # Contributing
 
-Contributions of all sizes are welcome: bug fixes, features, docs and ideas.
+Contributions are welcome across code, documentation, bug fixes, and ideas.
 
-## Setup
+## Development setup
 
 ```bash
 git clone https://github.com/ssannssarr/Zuni.git
@@ -11,36 +11,41 @@ uv sync
 uv run zuni --help
 ```
 
-## Preview the docs
+For a global editable installation:
+
+```bash
+uv tool install --editable .
+```
+
+## Preview the documentation
 
 ```bash
 uv run mkdocs serve
 ```
 
-Open `http://127.0.0.1:8000`.
-
 ## Workflow
 
-1. Fork the repository
-2. Create a branch
+1. Fork the repository.
+2. Create a focused branch.
+3. Make the change.
+4. Run relevant commands locally.
+5. Update documentation when behavior changes.
+6. Commit with a clear message.
+7. Push and open a pull request.
 
-    ```bash
-    git checkout -b feature/my-change
-    ```
+Example branch:
 
-3. Make your changes
-4. Test them locally
-5. Commit with a clear message
-6. Push and open a pull request
+```bash
+git checkout -b feature/my-change
+```
 
 ## Commit messages
-
-Use short, descriptive messages:
 
 ```text
 feat: add streaming responses
 fix: handle missing config file
 docs: expand installation guide
+refactor: simplify tool dispatch
 ```
 
 | Prefix | Use for |
@@ -48,41 +53,53 @@ docs: expand installation guide
 | `feat` | New features |
 | `fix` | Bug fixes |
 | `docs` | Documentation |
-| `refactor` | Code cleanup with no behavior change |
+| `refactor` | Internal restructuring |
 
 ## Code guidelines
 
-- Keep functions small and documented
-- Use type hints
-- Prefer async code for network calls
-- Follow the existing style
-- Never commit API keys or config files
+- Keep functions focused.
+- Use type hints.
+- Prefer async APIs for network operations.
+- Keep user-facing errors understandable.
+- Do not commit API keys or local configuration files.
+- Be careful when changing model-controlled network access.
+
+## Tool and web-search changes
+
+When modifying a tool:
+
+- keep its schema and implementation consistent
+- validate required arguments
+- preserve useful error messages
+- avoid exposing secrets in tool output
+- consider URL and redirect safety
+- update the architecture documentation
 
 ## Documentation guidelines
 
-- Update the docs when behavior changes
-- Add runnable examples
-- Keep pages short and scannable
+- Document current behavior, not planned behavior.
+- Keep examples runnable.
+- Keep pages short and scannable.
+- Update links when pages move.
+- Keep architecture documentation synchronized with the code.
 
-## Good first contributions
+## Useful contribution areas
 
-- Better error messages for failed API calls
-- Handling a missing config file gracefully
-- Tests for `config.py` and `llm.py`
-- Improving the docs
+Current areas that can use work include stronger agent tests, configuration handling, URL safety, error handling, documentation, CI, and packaging.
 
-## Reporting issues
+## Reporting a bug
 
-Open an issue at [github.com/ssannssarr/Zuni/issues](https://github.com/ssannssarr/Zuni/issues) and include:
+Open an issue and include:
 
-- The command you ran
-- The full output or error
-- Your OS and Python version (`python --version`)
-- Your Zuni version
+- command you ran
+- full error output
+- OS and Python version
+- Zuni version or commit
+- relevant configuration with secrets removed
 
 !!! warning
-    Remove API keys from any logs before posting.
+    Never include API keys, access tokens, or private configuration values in an issue.
 
 ## License
 
-By contributing, you agree your work is released under the [MIT License](https://github.com/ssannssarr/Zuni/blob/main/LICENSE).
+By contributing, you agree that your contribution is released under the project's [MIT License](https://github.com/ssannssarr/Zuni/blob/main/LICENSE).
