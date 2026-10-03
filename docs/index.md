@@ -13,12 +13,13 @@ hide:
 
   <h1>
     One Command.<br>
-    <span>Search Anything.</span>
+    <span>Search. Reason. Answer.</span>
   </h1>
 
   <p class="hero-subtitle">
     Zuni brings AI-powered research to your terminal.
-    Ask a question, get an answer, and keep your workflow where it belongs.
+    Ask a question, let Zuni search the web when needed,
+    and get a grounded answer without leaving your workflow.
   </p>
 
   <div class="hero-buttons">
@@ -43,14 +44,16 @@ hide:
 ```text
 $ zuni ask "What is quantum computing?"
 
-◌ Thinking...
+→ web_search: quantum computing
+→ extract_markdown: https://...
 
 Quantum computing uses quantum-mechanical phenomena
-such as superposition and entanglement to process
-information in fundamentally different ways from
-classical computers.
+to process information in ways that differ from
+classical computing. [1]
 
-$ _
+Sources
+[1] Source title
+    https://...
 ```
 
   </div>
@@ -60,8 +63,8 @@ $ _
   <div class="section-label">WHY ZUNI</div>
   <h2>Research without leaving<br>the terminal.</h2>
   <p>
-    Zuni is built around a simple idea:
-    <strong>reduce research to one command.</strong>
+    Zuni combines an OpenAI-compatible LLM client with
+    a small tool-calling agent and web research tools.
   </p>
 </div>
 
@@ -70,26 +73,26 @@ $ _
   <div class="feature-card">
     <div class="feature-icon">⚡</div>
     <h3>One Command</h3>
-    <p>Ask your question directly from the terminal without opening another application.</p>
+    <p>Ask a question directly from the terminal and let Zuni handle the research loop.</p>
   </div>
 
   <div class="feature-card">
-    <div class="feature-icon">⌘</div>
-    <h3>CLI First</h3>
-    <p>Designed for developers, students, and anyone who prefers a terminal-based workflow.</p>
+    <div class="feature-icon">⌕</div>
+    <h3>Web Research</h3>
+    <p>Search DuckDuckGo and read selected pages when current or factual information is needed.</p>
   </div>
 
   <div class="feature-card">
     <div class="feature-icon">◈</div>
-    <h3>AI Powered</h3>
-    <p>Connect Zuni to compatible AI models and turn questions into useful answers.</p>
+    <h3>Grounded Answers</h3>
+    <p>Sources are numbered and can be cited inline so you can inspect where an answer came from.</p>
   </div>
 
 </div>
 
 <div class="section-intro">
-  <div class="section-label">THE IDEA</div>
-  <h2>From question to answer.</h2>
+  <div class="section-label">THE FLOW</div>
+  <h2>Question to answer,<br>through tools.</h2>
 </div>
 
 <div class="flow">
@@ -105,7 +108,7 @@ $ _
   <div class="flow-step">
     <span class="flow-number">02</span>
     <strong>Research</strong>
-    <p>Gather useful information.</p>
+    <p>The model can call search and page-reading tools.</p>
   </div>
 
   <div class="flow-arrow">→</div>
@@ -113,7 +116,7 @@ $ _
   <div class="flow-step">
     <span class="flow-number">03</span>
     <strong>Answer</strong>
-    <p>Receive a clear response.</p>
+    <p>Zuni returns a Markdown response with sources.</p>
   </div>
 
 </div>
@@ -128,7 +131,11 @@ $ _
 zuni ask "Explain how DNS works"
 ```
 
-That's the idea behind Zuni. Simple interface. Powerful backend.
+By default, Zuni can use its research tools. To ask the model directly:
+
+```bash
+zuni ask --no-search "Explain recursion"
+```
 
 <a href="getting-started/installation/" class="text-link">Read the documentation →</a>
 
@@ -153,7 +160,7 @@ That's the idea behind Zuni. Simple interface. Powerful backend.
   <h2>Open your terminal.</h2>
   <p>
     The web is huge.<br>
-    Your command can be simple.
+    Your command can stay simple.
   </p>
   <a href="getting-started/installation/" class="zuni-button primary">Get Started →</a>
 </div>
