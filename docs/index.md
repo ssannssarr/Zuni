@@ -125,7 +125,13 @@ Sources
 
 <div class="section-label">GET STARTED</div>
 
-## Meet Zuni in one command.
+## Install and meet Zuni in one command.
+
+```bash
+uv tool install ssannssarr.zuni
+```
+
+Then ask:
 
 ```bash
 zuni ask "Explain how DNS works"
@@ -137,7 +143,7 @@ Research tools are available by default. To send the question directly to the mo
 zuni ask --no-search "Explain recursion"
 ```
 
-<a href="getting-started/installation/" class="text-link">Read the documentation →</a>
+<a href="getting-started/installation/" class="text-link">Read the installation guide →</a>
 
 </div>
 
