@@ -14,31 +14,27 @@
 
 Requires Python 3.11 or newer.
 
-Using `uv`:
+Install the latest release from PyPI with `uv`:
 
 ```bash
-uv tool install ssannssar.zuni
+uv tool install ssannssarr.zuni
 ```
 
-Or install into an environment:
+Verify the installation:
 
 ```bash
-uv add ssannssar.zuni
+zuni --help
 ```
 
 ## Configuration
 
-Set your API key:
+Run the interactive configuration command:
 
 ```bash
-zuni config --api-key YOUR_API_KEY
+zuni config
 ```
 
-You can also configure the model and API base URL:
-
-```bash
-zuni config --model YOUR_MODEL --base-url YOUR_BASE_URL
-```
+Zuni asks for your API key, model ID, and base URL.
 
 Environment variables are supported too:
 
