@@ -18,6 +18,7 @@ This roadmap describes direction rather than a fixed release schedule. Items can
 - [x] Numbered source tracking and citations
 - [x] Fallback search flow for models without tool calling
 - [x] Direct-answer mode with `--no-search`
+- [x] First PyPI release (`0.1.0`)
 
 ## In progress
 
@@ -33,7 +34,6 @@ This roadmap describes direction rather than a fixed release schedule. Items can
 - [ ] Reading input from stdin
 - [ ] Multiple saved configuration profiles
 - [ ] Continuous integration
-- [ ] PyPI release
 
 ## Ideas
 
