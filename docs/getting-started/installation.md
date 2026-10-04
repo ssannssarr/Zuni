@@ -41,10 +41,10 @@ uv --version
 
 ## Install Zuni
 
-Install the latest version directly from the GitHub repository:
+Zuni is published on PyPI. Install the latest release with:
 
 ```bash
-uv tool install git+https://github.com/ssannssarr/Zuni
+uv tool install ssannssarr.zuni
 ```
 
 Then verify the command:
@@ -54,6 +54,9 @@ zuni --help
 ```
 
 You should see the `ask` and `config` commands.
+
+!!! tip
+    If you want to install a specific release, append the version, for example `uv tool install ssannssarr.zuni==0.1.0`.
 
 ## Configure Zuni
 
@@ -81,7 +84,7 @@ uv run zuni --help
 
 ## Update
 
-For a tool installation:
+For a PyPI installation:
 
 ```bash
 uv tool upgrade zuni
