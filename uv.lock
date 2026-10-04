@@ -837,6 +837,37 @@ wheels = [
 ]
 
 [[package]]
+name = "ssannssarr-zuni"
+version = "0.1.0"
+source = { editable = "." }
+dependencies = [
+    { name = "asyncclick" },
+    { name = "bs4" },
+    { name = "curl-cffi" },
+    { name = "httpx" },
+    { name = "markdownify" },
+    { name = "rich" },
+]
+
+[package.dev-dependencies]
+dev = [
+    { name = "mkdocs-material" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "asyncclick", specifier = ">=8.4.2.1" },
+    { name = "bs4", specifier = ">=0.0.2" },
+    { name = "curl-cffi", specifier = ">=0.16.3" },
+    { name = "httpx", specifier = ">=0.28.1" },
+    { name = "markdownify", specifier = ">=1.0.0" },
+    { name = "rich", specifier = ">=15.0.0" },
+]
+
+[package.metadata.requires-dev]
+dev = [{ name = "mkdocs-material", specifier = ">=9.7.7" }]
+
+[[package]]
 name = "typing-extensions"
 version = "4.16.0"
 source = { registry = "https://pypi.org/simple" }
@@ -880,34 +911,3 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/db/d9/c495884c6e548fce18a8f40568ff120bc3a4b7b99813081c8ac0c936fa64/watchdog-6.0.0-py3-none-win_amd64.whl", hash = "sha256:cbafb470cf848d93b5d013e2ecb245d4aa1c8fd0504e863ccefa32445359d680", size = 79070, upload-time = "2024-11-01T14:07:10.686Z" },
     { url = "https://files.pythonhosted.org/packages/33/e8/e40370e6d74ddba47f002a32919d91310d6074130fe4e17dabcafc15cbf1/watchdog-6.0.0-py3-none-win_ia64.whl", hash = "sha256:a1914259fa9e1454315171103c6a30961236f508b9b623eae470268bbcc6a22f", size = 79067, upload-time = "2024-11-01T14:07:11.845Z" },
 ]
-
-[[package]]
-name = "zuni"
-version = "0.1.0"
-source = { editable = "." }
-dependencies = [
-    { name = "asyncclick" },
-    { name = "bs4" },
-    { name = "curl-cffi" },
-    { name = "httpx" },
-    { name = "markdownify" },
-    { name = "rich" },
-]
-
-[package.dev-dependencies]
-dev = [
-    { name = "mkdocs-material" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "asyncclick", specifier = ">=8.4.2.1" },
-    { name = "bs4", specifier = ">=0.0.2" },
-    { name = "curl-cffi", specifier = ">=0.16.3" },
-    { name = "httpx", specifier = ">=0.28.1" },
-    { name = "markdownify", specifier = ">=1.0.0" },
-    { name = "rich", specifier = ">=15.0.0" },
-]
-
-[package.metadata.requires-dev]
-dev = [{ name = "mkdocs-material", specifier = ">=9.7.7" }]
