@@ -869,10 +869,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#useful-contribution-areas" class="md-nav__link">
+  <a href="#areas-for-contribution" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Useful contribution areas
+        Areas for contribution
       
     </span>
   </a>
@@ -1075,10 +1075,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#useful-contribution-areas" class="md-nav__link">
+  <a href="#areas-for-contribution" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Useful contribution areas
+        Areas for contribution
       
     </span>
   </a>
@@ -1128,8 +1128,9 @@
 
 
 <h1 id="contributing">Contributing</h1>
-<p>Contributions are welcome across code, documentation, bug fixes, and ideas.</p>
+<p>Contributions are welcome in code, documentation, bug fixes, testing, and project ideas.</p>
 <h2 id="development-setup">Development setup</h2>
+<p>Clone the repository and install its development dependencies:</p>
 <div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ssannssarr/Zuni.git
 <span class="nb">cd</span><span class="w"> </span>Zuni
 uv<span class="w"> </span>sync
@@ -1139,22 +1140,26 @@ uv<span class="w"> </span>run<span class="w"> </span>zuni<span class="w"> </span
 <div class="highlight"><pre><span></span><code>uv<span class="w"> </span>tool<span class="w"> </span>install<span class="w"> </span>--editable<span class="w"> </span>.
 </code></pre></div>
 <h2 id="preview-the-documentation">Preview the documentation</h2>
+<p>Start the local MkDocs server:</p>
 <div class="highlight"><pre><span></span><code>uv<span class="w"> </span>run<span class="w"> </span>mkdocs<span class="w"> </span>serve
 </code></pre></div>
+<p>Open the local address shown by MkDocs and check both the homepage and regular documentation pages.</p>
 <h2 id="workflow">Workflow</h2>
+<p>A typical contribution looks like this:</p>
 <ol>
 <li>Fork the repository.</li>
 <li>Create a focused branch.</li>
 <li>Make the change.</li>
-<li>Run relevant commands locally.</li>
+<li>Run the relevant commands locally.</li>
 <li>Update documentation when behavior changes.</li>
-<li>Commit with a clear message.</li>
-<li>Push and open a pull request.</li>
+<li>Commit the change with a clear message.</li>
+<li>Push the branch and open a pull request.</li>
 </ol>
-<p>Example branch:</p>
+<p>For example:</p>
 <div class="highlight"><pre><span></span><code>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>feature/my-change
 </code></pre></div>
 <h2 id="commit-messages">Commit messages</h2>
+<p>Keep commit messages short and descriptive:</p>
 <div class="highlight"><pre><span></span><code>feat: add streaming responses
 fix: handle missing config file
 docs: expand installation guide
@@ -1178,7 +1183,7 @@ refactor: simplify tool dispatch
 </tr>
 <tr>
 <td><code>docs</code></td>
-<td>Documentation</td>
+<td>Documentation changes</td>
 </tr>
 <tr>
 <td><code>refactor</code></td>
@@ -1188,40 +1193,51 @@ refactor: simplify tool dispatch
 </table>
 <h2 id="code-guidelines">Code guidelines</h2>
 <ul>
-<li>Keep functions focused.</li>
-<li>Use type hints.</li>
-<li>Prefer async APIs for network operations.</li>
-<li>Keep user-facing errors understandable.</li>
-<li>Do not commit API keys or local configuration files.</li>
-<li>Be careful when changing model-controlled network access.</li>
+<li>Keep functions focused and easy to follow.</li>
+<li>Use type hints where practical.</li>
+<li>Prefer asynchronous APIs for network operations.</li>
+<li>Keep user-facing errors clear and actionable.</li>
+<li>Never commit API keys or local configuration files.</li>
+<li>Treat model-controlled network access as untrusted input.</li>
 </ul>
 <h2 id="tool-and-web-search-changes">Tool and web-search changes</h2>
 <p>When modifying a tool:</p>
 <ul>
-<li>keep its schema and implementation consistent</li>
+<li>keep its schema and implementation in sync</li>
 <li>validate required arguments</li>
 <li>preserve useful error messages</li>
 <li>avoid exposing secrets in tool output</li>
 <li>consider URL and redirect safety</li>
-<li>update the architecture documentation</li>
+<li>update the architecture documentation when behavior changes</li>
 </ul>
 <h2 id="documentation-guidelines">Documentation guidelines</h2>
+<p>Documentation should describe the current implementation.</p>
 <ul>
-<li>Document current behavior, not planned behavior.</li>
 <li>Keep examples runnable.</li>
-<li>Keep pages short and scannable.</li>
+<li>Prefer short sections and clear headings.</li>
+<li>Explain behavior before implementation details.</li>
 <li>Update links when pages move.</li>
 <li>Keep architecture documentation synchronized with the code.</li>
+<li>Avoid presenting planned features as if they already exist.</li>
 </ul>
-<h2 id="useful-contribution-areas">Useful contribution areas</h2>
-<p>Current areas that can use work include stronger agent tests, configuration handling, URL safety, error handling, documentation, CI, and packaging.</p>
-<h2 id="reporting-a-bug">Reporting a bug</h2>
-<p>Open an issue and include:</p>
+<h2 id="areas-for-contribution">Areas for contribution</h2>
+<p>Some useful areas include:</p>
 <ul>
-<li>command you ran</li>
-<li>full error output</li>
-<li>OS and Python version</li>
-<li>Zuni version or commit</li>
+<li>agent and tool tests</li>
+<li>configuration handling</li>
+<li>URL safety</li>
+<li>error handling</li>
+<li>documentation</li>
+<li>CI</li>
+<li>packaging</li>
+</ul>
+<h2 id="reporting-a-bug">Reporting a bug</h2>
+<p>When opening an issue, include:</p>
+<ul>
+<li>the command you ran</li>
+<li>the complete error output</li>
+<li>your OS and Python version</li>
+<li>your Zuni version or commit</li>
 <li>relevant configuration with secrets removed</li>
 </ul>
 <div class="admonition warning">

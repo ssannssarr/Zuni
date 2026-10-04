@@ -688,10 +688,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#configuration-file-error" class="md-nav__link">
+  <a href="#configuration-file-errors" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Configuration file error
+        Configuration file errors
       
     </span>
   </a>
@@ -699,10 +699,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#api-key-error" class="md-nav__link">
+  <a href="#api-key-errors" class="md-nav__link">
     <span class="md-ellipsis">
       
-        API key error
+        API key errors
       
     </span>
   </a>
@@ -1053,10 +1053,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#configuration-file-error" class="md-nav__link">
+  <a href="#configuration-file-errors" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Configuration file error
+        Configuration file errors
       
     </span>
   </a>
@@ -1064,10 +1064,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#api-key-error" class="md-nav__link">
+  <a href="#api-key-errors" class="md-nav__link">
     <span class="md-ellipsis">
       
-        API key error
+        API key errors
       
     </span>
   </a>
@@ -1216,53 +1216,100 @@
 
 
 <h1 id="troubleshooting">Troubleshooting</h1>
+<p>This page covers common installation, configuration, network, and model issues.</p>
 <h2 id="zuni-command-not-found"><code>zuni: command not found</code></h2>
-<p>Update uv's shell integration:</p>
+<p>Refresh uv's shell integration:</p>
 <div class="highlight"><pre><span></span><code>uv<span class="w"> </span>tool<span class="w"> </span>update-shell
 </code></pre></div>
-<p>Restart the terminal and try again.</p>
-<h2 id="configuration-file-error">Configuration file error</h2>
-<p>If you see <code>Configuration File doesn't exists!</code>, run:</p>
+<p>Restart your terminal and try again.</p>
+<h2 id="configuration-file-errors">Configuration file errors</h2>
+<p>If Zuni reports that the configuration file does not exist, run:</p>
 <div class="highlight"><pre><span></span><code>zuni<span class="w"> </span>config
 </code></pre></div>
-<p>Zuni stores configuration at <code>~/.config/zuni/config.json</code>.</p>
-<h2 id="api-key-error">API key error</h2>
-<p>Set the current environment variable:</p>
+<p>The default configuration path is:</p>
+<div class="highlight"><pre><span></span><code>~/.config/zuni/config.json
+</code></pre></div>
+<h2 id="api-key-errors">API key errors</h2>
+<p>You can provide the key through the environment:</p>
 <div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">ZUNI_API_KEY</span><span class="o">=</span><span class="s2">"your-api-key"</span>
 </code></pre></div>
-<p>or run <code>zuni config</code>. The current implementation checks <code>ZUNI_API_KEY</code>, not <code>OPENROUTER_API_KEY</code>.</p>
+<p>Or run <code>zuni config</code>.</p>
+<p>The current implementation reads <code>ZUNI_API_KEY</code>; it does not use <code>OPENROUTER_API_KEY</code> automatically.</p>
 <h2 id="authentication-errors">Authentication errors</h2>
-<p>For HTTP 401 or 403 responses, verify the API key, provider, and model access.</p>
+<p>For HTTP <code>401</code> or <code>403</code> responses, check:</p>
+<ul>
+<li>the API key</li>
+<li>the provider</li>
+<li>the model ID</li>
+<li>whether the account has access to the selected model</li>
+</ul>
 <h2 id="model-or-provider-errors">Model or provider errors</h2>
-<p>Zuni sends requests to <code>{BASE_URL}/chat/completions</code>. Check <code>MODEL</code> and <code>BASE_URL</code> in your configuration.</p>
+<p>Zuni sends requests to:</p>
+<div class="highlight"><pre><span></span><code>{BASE_URL}/chat/completions
+</code></pre></div>
+<p>Check <code>MODEL</code> and <code>BASE_URL</code> in your configuration and make sure the provider exposes the expected OpenAI-compatible endpoint.</p>
 <h2 id="rate-limits">Rate limits</h2>
-<p>The LLM client retries temporary failures including HTTP 429 and common 5xx responses. If the provider continues returning errors, wait or change models.</p>
+<p>The LLM client retries temporary failures, including HTTP <code>429</code> and common <code>5xx</code> responses. If the provider continues returning errors, wait and try again or select another model.</p>
 <h2 id="connection-or-timeout-errors">Connection or timeout errors</h2>
-<p>Check your internet connection, base URL, provider availability, firewall, and VPN. The LLM client uses a 60-second default timeout and retries temporary failures.</p>
+<p>Check your:</p>
+<ul>
+<li>internet connection</li>
+<li>base URL</li>
+<li>provider availability</li>
+<li>firewall or network restrictions</li>
+<li>VPN configuration</li>
+</ul>
+<p>The LLM client currently uses a 60-second default timeout and retries temporary failures.</p>
 <h2 id="web-search-fails">Web search fails</h2>
-<p>DuckDuckGo may rate-limit automated requests. If search is unavailable, Zuni can return the tool error to the model or use its search-first fallback when tool calling is unavailable.</p>
-<p>For questions that do not need research:</p>
+<p>DuckDuckGo can temporarily limit automated requests. If web search fails, Zuni can continue without results or use its search-first fallback when the selected model cannot use tools.</p>
+<p>For questions that do not require web research:</p>
 <div class="highlight"><pre><span></span><code>zuni<span class="w"> </span>ask<span class="w"> </span>--no-search<span class="w"> </span><span class="s2">"Explain recursion"</span>
 </code></pre></div>
 <h2 id="the-model-does-not-support-tools">The model does not support tools</h2>
-<p>Not every OpenAI-compatible model supports tool calling. When the first tool-enabled request fails, Zuni falls back to:</p>
+<p>Tool calling is not available from every OpenAI-compatible model or provider.</p>
+<p>When the first tool-enabled request fails, Zuni falls back to:</p>
 <div class="highlight"><pre><span></span><code>web search → collect sources → normal LLM request
 </code></pre></div>
+<p>This fallback is simpler than the normal agent workflow, but it still gives the model the collected source material.</p>
 <h2 id="answers-have-no-citations">Answers have no citations</h2>
-<p>Citations depend on the model using the source numbers supplied by Zuni. Check that web research ran and inspect the source list printed below the answer.</p>
-<p>Zuni only accepts citation numbers that correspond to collected sources.</p>
+<p>Citations depend on the model using the source numbers provided by Zuni.</p>
+<p>If an answer has no citations:</p>
+<ol>
+<li>Check that web research actually ran.</li>
+<li>Look at the source list printed below the answer.</li>
+<li>Check whether the answer contains source references such as <code>[1]</code>.</li>
+</ol>
+<p>Zuni only displays citation numbers that correspond to collected sources.</p>
 <h2 id="a-page-cannot-be-fetched">A page cannot be fetched</h2>
-<p>Zuni rejects obvious local/private/non-HTTP(S) targets when reading model-selected URLs. Public pages can still fail because of anti-bot protection, authentication, redirects, network errors, or unusual HTML.</p>
+<p>Zuni rejects obvious local, private, or non-HTTP(S) targets when reading model-selected URLs.</p>
+<p>A public page can still fail to load because of:</p>
+<ul>
+<li>anti-bot protection</li>
+<li>authentication requirements</li>
+<li>redirects</li>
+<li>network errors</li>
+<li>unusual or unsupported HTML</li>
+</ul>
 <h2 id="python-version">Python version</h2>
-<p>Package metadata supports Python 3.11+. The repository currently uses Python 3.14 for development.</p>
+<p>The package supports Python 3.11+. The repository currently uses Python 3.14 for development.</p>
+<p>Check your version with:</p>
 <div class="highlight"><pre><span></span><code>python<span class="w"> </span>--version
 </code></pre></div>
 <h2 id="debug-mode">Debug mode</h2>
-<p>Set <code>ZUNI_DEBUG</code> to let unexpected exceptions propagate:</p>
+<p>Set <code>ZUNI_DEBUG</code> to allow unexpected exceptions to propagate:</p>
 <div class="highlight"><pre><span></span><code><span class="nv">ZUNI_DEBUG</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>zuni<span class="w"> </span>ask<span class="w"> </span><span class="s2">"your question"</span>
 </code></pre></div>
+<p>Use this when you need a traceback for debugging.</p>
 <h2 id="still-stuck">Still stuck?</h2>
-<p>Open an issue and include the command, full error, OS, Python version, and relevant configuration with secrets removed. Never post your API key.</p>
+<p>Open an issue with:</p>
+<ul>
+<li>the command you ran</li>
+<li>the complete error output</li>
+<li>your OS and Python version</li>
+<li>your Zuni version or commit</li>
+<li>relevant configuration with secrets removed</li>
+</ul>
+<p>Never include an API key or access token.</p>
 
 
 

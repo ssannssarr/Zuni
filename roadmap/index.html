@@ -991,50 +991,50 @@
 
 
 <h1 id="roadmap">Roadmap</h1>
-<p>Zuni is evolving from a small CLI question-answering tool into a compact terminal research assistant.</p>
-<p>This roadmap describes the current direction. It is not a fixed release schedule.</p>
+<p>Zuni is developing from a small command-line question-answering tool into a compact terminal research assistant.</p>
+<p>This roadmap describes direction rather than a fixed release schedule. Items can change as the project evolves.</p>
 <h2 id="available-now">Available now</h2>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <code>zuni ask</code> for one-command questions</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <code>zuni config</code> for API key, model, and base URL</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> One-command questions with <code>zuni ask</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Interactive configuration with <code>zuni config</code></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> OpenAI-compatible chat-completions support</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Markdown rendering in the terminal</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Async HTTP requests</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Asynchronous HTTP requests</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Retry handling for temporary LLM API failures</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Agent/tool-calling loop</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Tool-calling agent</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> DuckDuckGo web search</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Web-page extraction to Markdown</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Numbered source tracking and citations</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Fallback search flow for models without tool calling</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <code>--no-search</code> direct-answer mode</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Direct-answer mode with <code>--no-search</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> First PyPI release (<code>0.1.0</code>)</li>
 </ul>
 <h2 id="in-progress">In progress</h2>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Stronger validation of model-generated tool calls</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> More robust URL and redirect safety</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Automated tests for configuration, tools, citations, and the agent loop</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Better documentation and API reference</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Expanded documentation and API reference</li>
 </ul>
 <h2 id="planned">Planned</h2>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Streaming responses</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Conversation mode</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Reading input from stdin</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Multiple saved profiles</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> CI pipeline</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> PyPI release</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Multiple saved configuration profiles</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Continuous integration</li>
 </ul>
 <h2 id="ideas">Ideas</h2>
 <ul>
 <li>Shell completions</li>
-<li>JSON and other structured output modes</li>
+<li>JSON and other structured output formats</li>
 <li>Additional research tools</li>
-<li>Local/offline-first workflows</li>
+<li>Local and offline-first workflows</li>
 <li>More provider-specific configuration options</li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The roadmap can change as Zuni's architecture and goals evolve.</p>
+<p>The roadmap is intentionally flexible. Features may move, change, or be removed as Zuni's design develops.</p>
 </div>
 
 

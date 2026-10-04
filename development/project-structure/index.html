@@ -786,10 +786,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#adding-or-changing-a-command" class="md-nav__link">
+  <a href="#changing-a-command" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Adding or changing a command
+        Changing a command
       
     </span>
   </a>
@@ -965,10 +965,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#adding-or-changing-a-command" class="md-nav__link">
+  <a href="#changing-a-command" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Adding or changing a command
+        Changing a command
       
     </span>
   </a>
@@ -1018,7 +1018,7 @@
 
 
 <h1 id="project-structure">Project Structure</h1>
-<p>The repository separates the CLI, LLM client, agent, search layer, tools, prompts, and documentation.</p>
+<p>Zuni keeps its main responsibilities separated across the CLI, LLM client, agent, search layer, tools, prompts, and documentation.</p>
 <div class="highlight"><pre><span></span><code>Zuni/
 ├── README.md
 ├── LICENSE
@@ -1066,13 +1066,13 @@
 <thead>
 <tr>
 <th>Path</th>
-<th>Purpose</th>
+<th>Responsibility</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>src/zuni/cli.py</code></td>
-<td>CLI commands, execution flow, and output rendering</td>
+<td>CLI commands, execution flow, and terminal output</td>
 </tr>
 <tr>
 <td><code>src/zuni/agent.py</code></td>
@@ -1112,7 +1112,7 @@
 </tr>
 <tr>
 <td><code>src/zuni/tools/web_search.py</code></td>
-<td>Search plus page enrichment</td>
+<td>Search and page enrichment</td>
 </tr>
 <tr>
 <td><code>src/zuni/tools/extract_markdown.py</code></td>
@@ -1121,31 +1121,32 @@
 </tbody>
 </table>
 <h2 id="packaging">Packaging</h2>
-<p><code>pyproject.toml</code> contains package metadata, runtime dependencies, the Python requirement, and the <code>zuni</code> console-script entry point:</p>
+<p><code>pyproject.toml</code> contains the package metadata, runtime dependencies, Python requirement, and console-script entry point:</p>
 <div class="highlight"><pre><span></span><code><span class="k">[project.scripts]</span>
 <span class="n">zuni</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"zuni.cli:main"</span>
 </code></pre></div>
-<p>The repository's <code>.python-version</code> currently uses Python 3.14 for development, while package metadata supports Python 3.11+.</p>
-<h2 id="adding-or-changing-a-command">Adding or changing a command</h2>
+<p>The repository uses Python 3.14 for development, while the package metadata supports Python 3.11 and newer.</p>
+<h2 id="changing-a-command">Changing a command</h2>
+<p>When adding or changing a command:</p>
 <ol>
-<li>Update the command in <code>src/zuni/cli.py</code>.</li>
+<li>Update <code>src/zuni/cli.py</code>.</li>
 <li>Test it with <code>uv run zuni ...</code>.</li>
 <li>Update <a href="../../guide/commands/">Commands</a>.</li>
-<li>Update architecture documentation if the execution flow changed.</li>
+<li>Update the architecture page if the execution flow changes.</li>
 </ol>
 <h2 id="adding-a-tool">Adding a tool</h2>
-<p>A tool has three important pieces:</p>
+<p>A tool has three main parts:</p>
 <ol>
-<li>Schema in <code>src/zuni/tools/schema.py</code>.</li>
-<li>Execution in <code>src/zuni/tools/toolbox.py</code>.</li>
-<li>Implementation in the relevant search/tool module.</li>
+<li>A schema in <code>src/zuni/tools/schema.py</code>.</li>
+<li>Dispatch logic in <code>src/zuni/tools/toolbox.py</code>.</li>
+<li>The implementation in the relevant search or tool module.</li>
 </ol>
-<p>The schema name and dispatcher name must match.</p>
+<p>The schema name and dispatcher name must remain consistent.</p>
 <h2 id="documentation">Documentation</h2>
-<p>Run the local documentation server with:</p>
+<p>Preview the documentation locally with:</p>
 <div class="highlight"><pre><span></span><code>uv<span class="w"> </span>run<span class="w"> </span>mkdocs<span class="w"> </span>serve
 </code></pre></div>
-<p>When code behavior changes, update the corresponding documentation page in the same change whenever possible.</p>
+<p>When code behavior changes, update the corresponding documentation page in the same change whenever practical.</p>
 
 
 

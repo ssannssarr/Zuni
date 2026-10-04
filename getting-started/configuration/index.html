@@ -545,10 +545,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#config-file" class="md-nav__link">
+  <a href="#configuration-file" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Config file
+        Configuration file
       
     </span>
   </a>
@@ -1015,10 +1015,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#config-file" class="md-nav__link">
+  <a href="#configuration-file" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Config file
+        Configuration file
       
     </span>
   </a>
@@ -1140,28 +1140,29 @@
 
 
 <h1 id="configuration">Configuration</h1>
-<p>Zuni uses an OpenAI-compatible <code>/chat/completions</code> API. OpenRouter is the default base URL when no base URL is supplied.</p>
+<p>Zuni connects to an OpenAI-compatible <code>/chat/completions</code> endpoint. The default base URL is OpenRouter when no other base URL is configured.</p>
 <h2 id="interactive-setup">Interactive setup</h2>
+<p>The simplest way to configure Zuni is:</p>
 <div class="highlight"><pre><span></span><code>zuni<span class="w"> </span>config
 </code></pre></div>
-<p>Zuni asks for three values:</p>
+<p>You will be asked for three values:</p>
 <table>
 <thead>
 <tr>
 <th>Prompt</th>
-<th>Description</th>
+<th>Purpose</th>
 <th>Example</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>API key</td>
-<td>Credential used for the model API</td>
+<td>Credential used to access the model API</td>
 <td><code>sk-or-v1-...</code></td>
 </tr>
 <tr>
 <td>Model ID</td>
-<td>Model identifier accepted by your provider</td>
+<td>Model identifier accepted by the provider</td>
 <td><code>openrouter/free</code></td>
 </tr>
 <tr>
@@ -1174,13 +1175,15 @@
 <p>The values are saved to:</p>
 <div class="highlight"><pre><span></span><code>~/.config/zuni/config.json
 </code></pre></div>
-<h2 id="config-file">Config file</h2>
+<h2 id="configuration-file">Configuration file</h2>
+<p>A typical configuration looks like this:</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
 <span class="w">    </span><span class="nt">"API_KEY"</span><span class="p">:</span><span class="w"> </span><span class="s2">"your-api-key"</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">"MODEL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"openrouter/free"</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">"BASE_URL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://openrouter.ai/api/v1"</span>
 <span class="p">}</span>
 </code></pre></div>
+<p>Keep this file private because it can contain your API key.</p>
 <h2 id="environment-variables">Environment variables</h2>
 <table>
 <thead>
@@ -1235,12 +1238,8 @@
 <ol>
 <li><code>ZUNI_BASE_URL</code></li>
 <li><code>BASE_URL</code> in <code>config.json</code></li>
-<li>OpenRouter's default URL in the LLM client</li>
+<li>The default URL in the LLM client</li>
 </ol>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Running <code>zuni config</code> once is the simplest setup because Zuni reads the model and base URL from the configuration module.</p>
-</div>
 <h2 id="provider-examples">Provider examples</h2>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">OpenRouter</label><label for="__tabbed_2_2">OpenAI</label><label for="__tabbed_2_3">Local Ollama</label></div>
 <div class="tabbed-content">
@@ -1262,16 +1261,17 @@ API key: ollama
 </div>
 </div>
 </div>
-<p>Any provider that accepts the OpenAI-compatible <code>POST /chat/completions</code> format can be used. Tool calling additionally depends on model/provider support.</p>
+<p>Zuni can work with providers that implement the OpenAI-compatible <code>POST /chat/completions</code> interface. Tool calling also requires support for the <code>tools</code> request format.</p>
 <h2 id="security">Security</h2>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Never commit your API key or <code>config.json</code> to Git. If a key leaks, revoke it from your provider immediately.</p>
+<p>Never commit your API key or <code>config.json</code> to Git. If an API key is exposed, revoke it through the provider and create a replacement.</p>
 </div>
-<p>On Linux, macOS, and Termux:</p>
+<p>On Linux, macOS, and Termux, you can restrict access to the configuration file:</p>
 <div class="highlight"><pre><span></span><code>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>~/.config/zuni/config.json
 </code></pre></div>
 <h2 id="reset-configuration">Reset configuration</h2>
+<p>Remove the configuration file and run setup again:</p>
 <div class="highlight"><pre><span></span><code>rm<span class="w"> </span>~/.config/zuni/config.json
 zuni<span class="w"> </span>config
 </code></pre></div>

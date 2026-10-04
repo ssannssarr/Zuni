@@ -666,10 +666,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#how-a-researched-question-works" class="md-nav__link">
+  <a href="#research-flow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        How a researched question works
+        Research flow
       
     </span>
   </a>
@@ -677,10 +677,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#sources" class="md-nav__link">
+  <a href="#sources-and-citations" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Sources
+        Sources and citations
       
     </span>
   </a>
@@ -688,10 +688,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#quoting-tips" class="md-nav__link">
+  <a href="#shell-quoting" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Quoting tips
+        Shell quoting
       
     </span>
   </a>
@@ -1060,10 +1060,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#how-a-researched-question-works" class="md-nav__link">
+  <a href="#research-flow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        How a researched question works
+        Research flow
       
     </span>
   </a>
@@ -1071,10 +1071,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#sources" class="md-nav__link">
+  <a href="#sources-and-citations" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Sources
+        Sources and citations
       
     </span>
   </a>
@@ -1082,10 +1082,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#quoting-tips" class="md-nav__link">
+  <a href="#shell-quoting" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Quoting tips
+        Shell quoting
       
     </span>
   </a>
@@ -1162,7 +1162,7 @@
 
 
 <h1 id="commands">Commands</h1>
-<p>Zuni currently exposes two commands:</p>
+<p>Zuni keeps its command-line interface small:</p>
 <div class="highlight"><pre><span></span><code>zuni<span class="w"> </span><span class="o">[</span>COMMAND<span class="o">]</span><span class="w"> </span><span class="o">[</span>ARGUMENTS<span class="o">]</span>
 </code></pre></div>
 <table>
@@ -1175,11 +1175,11 @@
 <tbody>
 <tr>
 <td><code>zuni ask</code></td>
-<td>Ask a question and optionally research the web</td>
+<td>Ask a question, with optional web research</td>
 </tr>
 <tr>
 <td><code>zuni config</code></td>
-<td>Save API key, model, and base URL</td>
+<td>Configure the API key, model, and base URL</td>
 </tr>
 <tr>
 <td><code>zuni --help</code></td>
@@ -1189,10 +1189,10 @@
 </table>
 <hr />
 <h2 id="zuni-ask"><code>zuni ask</code></h2>
-<p>Ask a question from the terminal.</p>
+<p>Ask a question directly from your terminal:</p>
 <div class="highlight"><pre><span></span><code>zuni<span class="w"> </span>ask<span class="w"> </span><span class="s2">"Explain how DNS works"</span>
 </code></pre></div>
-<p>Web research is enabled by default. The agent can decide to use the available tools, then return an answer with cited sources.</p>
+<p>Web research is enabled by default. The model can choose to use Zuni's available tools before producing the answer.</p>
 <h3 id="syntax">Syntax</h3>
 <div class="highlight"><pre><span></span><code>zuni ask [OPTIONS] PROMPT...
 </code></pre></div>
@@ -1207,17 +1207,17 @@
 <tbody>
 <tr>
 <td><code>--no-search</code></td>
-<td>Skip the agent/tool workflow and ask the model directly</td>
+<td>Skip the agent and tools and ask the model directly</td>
 </tr>
 <tr>
 <td><code>-n, --results INTEGER</code></td>
-<td>Maximum number of search results to use, from 1 to 10; default: 5</td>
+<td>Maximum number of search results, from 1 to 10; default: 5</td>
 </tr>
 </tbody>
 </table>
-<p>The prompt can contain multiple shell arguments. Zuni joins them into one question.</p>
+<p>If the prompt contains multiple shell arguments, Zuni joins them into one question.</p>
 <h3 id="examples">Examples</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Research</label><label for="__tabbed_1_2">Direct model</label><label for="__tabbed_1_3">Control result count</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Research</label><label for="__tabbed_1_2">Direct model</label><label for="__tabbed_1_3">Choose result count</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code>zuni<span class="w"> </span>ask<span class="w"> </span><span class="s2">"What are the latest changes in Python?"</span>
@@ -1236,50 +1236,52 @@ zuni<span class="w"> </span>ask<span class="w"> </span>--results<span class="w">
 </div>
 </div>
 </div>
-<h3 id="how-a-researched-question-works">How a researched question works</h3>
+<h3 id="research-flow">Research flow</h3>
+<p>For a normal research request:</p>
 <ol>
-<li>Zuni loads the system prompt and configuration.</li>
-<li>The LLM receives the question plus the available tool definitions.</li>
-<li>The model may call <code>web_search</code>.</li>
-<li>Zuni runs the requested tool and sends the result back to the model.</li>
-<li>The model may call <code>extract_markdown</code> to read a specific page.</li>
-<li>The agent repeats the tool loop until the model answers or the step budget is reached.</li>
-<li>Zuni renders the Markdown answer.</li>
-<li>Cited sources are printed below the answer.</li>
+<li>Zuni loads the configuration and system prompt.</li>
+<li>The LLM receives the question and available tool definitions.</li>
+<li>The model can call <code>web_search</code>.</li>
+<li>Zuni runs the requested tool and returns its result to the model.</li>
+<li>The model can call <code>extract_markdown</code> when it needs to read a page.</li>
+<li>The agent repeats the tool loop until the model answers or the step limit is reached.</li>
+<li>Zuni renders the answer as Markdown.</li>
+<li>Zuni prints the relevant sources below the answer.</li>
 </ol>
-<p>If the selected model does not support tool calling, Zuni falls back to a simpler flow: search first, then send the collected sources to the model.</p>
-<h3 id="sources">Sources</h3>
-<p>When web research is used, Zuni numbers sources:</p>
+<p>If the selected model cannot use tool calling, Zuni switches to a simpler search-first flow: it collects web results and sends them to the model in a normal request.</p>
+<h3 id="sources-and-citations">Sources and citations</h3>
+<p>Web sources are assigned numbers:</p>
 <div class="highlight"><pre><span></span><code>[1] Source title
 URL: https://example.com/...
-Source content...
 
 [2] Another source
 URL: https://example.org/...
-Source content...
 </code></pre></div>
-<p>The model can cite them as <code>[1]</code>, <code>[2]</code>, etc. Zuni then prints the cited sources at the bottom of the response.</p>
-<h3 id="quoting-tips">Quoting tips</h3>
-<p>Quote questions containing shell characters:</p>
+<p>The model is instructed to cite these numbers inline, for example <code>[1]</code>. Zuni then prints the corresponding source URLs below the answer.</p>
+<h3 id="shell-quoting">Shell quoting</h3>
+<p>Quote prompts when they contain shell characters such as <code>$</code>:</p>
 <div class="highlight"><pre><span></span><code>zuni<span class="w"> </span>ask<span class="w"> </span><span class="s1">'What does $PATH do?'</span>
 zuni<span class="w"> </span>ask<span class="w"> </span><span class="s2">"What is Python's GIL?"</span>
 </code></pre></div>
 <h3 id="save-an-answer">Save an answer</h3>
+<p>Redirect the terminal output to a file:</p>
 <div class="highlight"><pre><span></span><code>zuni<span class="w"> </span>ask<span class="w"> </span><span class="s2">"List five Linux commands"</span><span class="w"> </span>&gt;<span class="w"> </span>answer.txt
 </code></pre></div>
-<p>Terminal Markdown styling is not preserved in redirected output.</p>
+<p>Rich terminal formatting is not preserved in the redirected output.</p>
 <h3 id="alias">Alias</h3>
+<p>You can create a short shell alias:</p>
 <div class="highlight"><pre><span></span><code><span class="nb">alias</span><span class="w"> </span><span class="nv">z</span><span class="o">=</span><span class="s1">'zuni ask'</span>
 z<span class="w"> </span><span class="s2">"What is a mutex?"</span>
 </code></pre></div>
 <hr />
 <h2 id="zuni-config"><code>zuni config</code></h2>
-<p>Interactively saves configuration:</p>
+<p>Run the interactive configuration command:</p>
 <div class="highlight"><pre><span></span><code>zuni<span class="w"> </span>config
 </code></pre></div>
-<p>See <a href="../../getting-started/configuration/">Configuration</a> for details.</p>
+<p>It asks for the API key, model ID, and base URL. See <a href="../../getting-started/configuration/">Configuration</a> for the details.</p>
 <hr />
 <h2 id="help">Help</h2>
+<p>Use the built-in help whenever you need the exact command syntax:</p>
 <div class="highlight"><pre><span></span><code>zuni<span class="w"> </span>--help
 zuni<span class="w"> </span>ask<span class="w"> </span>--help
 zuni<span class="w"> </span>config<span class="w"> </span>--help

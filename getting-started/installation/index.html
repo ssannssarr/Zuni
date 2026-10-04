@@ -539,10 +539,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#configure" class="md-nav__link">
+  <a href="#configure-zuni" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Configure
+        Configure Zuni
       
     </span>
   </a>
@@ -1009,10 +1009,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#configure" class="md-nav__link">
+  <a href="#configure-zuni" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Configure
+        Configure Zuni
       
     </span>
   </a>
@@ -1084,7 +1084,7 @@
 
 
 <h1 id="installation">Installation</h1>
-<p>Get Zuni running in a few steps.</p>
+<p>Get Zuni installed and ready to use from your terminal.</p>
 <h2 id="requirements">Requirements</h2>
 <table>
 <thead>
@@ -1098,22 +1098,22 @@
 <tr>
 <td>Python</td>
 <td>3.11+</td>
-<td>Declared package requirement</td>
+<td>Minimum version supported by the package</td>
 </tr>
 <tr>
 <td>uv</td>
-<td>latest</td>
-<td>Recommended package and tool manager</td>
+<td>Latest</td>
+<td>Recommended for installation and project management</td>
 </tr>
 <tr>
 <td>API key</td>
-<td>provider-dependent</td>
-<td>Required for hosted model APIs</td>
+<td>Provider-dependent</td>
+<td>Required when using a hosted model API</td>
 </tr>
 <tr>
-<td>Internet</td>
-<td>required for web research</td>
-<td>Direct local-model mode can avoid web access</td>
+<td>Internet access</td>
+<td>Required for web research</td>
+<td>Not required for a local model used without web tools</td>
 </tr>
 </tbody>
 </table>
@@ -1135,21 +1135,28 @@
 </div>
 </div>
 </div>
-<p>Verify:</p>
+<p>Verify the installation:</p>
 <div class="highlight"><pre><span></span><code>uv<span class="w"> </span>--version
 </code></pre></div>
 <h2 id="install-zuni">Install Zuni</h2>
-<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>tool<span class="w"> </span>install<span class="w"> </span>git+https://github.com/ssannssarr/Zuni
+<p>Zuni is published on PyPI. Install the latest release with:</p>
+<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>tool<span class="w"> </span>install<span class="w"> </span>ssannssarr.zuni
 </code></pre></div>
-<p>Then:</p>
+<p>Then verify the command:</p>
 <div class="highlight"><pre><span></span><code>zuni<span class="w"> </span>--help
 </code></pre></div>
 <p>You should see the <code>ask</code> and <code>config</code> commands.</p>
-<h2 id="configure">Configure</h2>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you want to install a specific release, append the version, for example <code>uv tool install ssannssarr.zuni==0.1.0</code>.</p>
+</div>
+<h2 id="configure-zuni">Configure Zuni</h2>
+<p>Run:</p>
 <div class="highlight"><pre><span></span><code>zuni<span class="w"> </span>config
 </code></pre></div>
-<p>Zuni asks for an API key, model ID, and base URL. Continue with <a href="../configuration/">Configuration</a>.</p>
+<p>Zuni will ask for your API key, model ID, and base URL. See <a href="../configuration/">Configuration</a> for details.</p>
 <h2 id="install-from-source">Install from source</h2>
+<p>For development or local changes:</p>
 <div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ssannssarr/Zuni.git
 <span class="nb">cd</span><span class="w"> </span>Zuni
 uv<span class="w"> </span>sync
@@ -1157,26 +1164,28 @@ uv<span class="w"> </span>run<span class="w"> </span>zuni<span class="w"> </span
 </code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>Run <code>uv tool install --editable .</code> inside the repository if you want a global <code>zuni</code> command that follows local source changes.</p>
+<p>Use <code>uv tool install --editable .</code> from the repository if you want a global <code>zuni</code> command that follows your local source changes.</p>
 </div>
 <h2 id="update">Update</h2>
-<p>Tool installation:</p>
-<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>tool<span class="w"> </span>upgrade<span class="w"> </span>zuni
+<p>For a PyPI installation:</p>
+<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>tool<span class="w"> </span>upgrade<span class="w"> </span>ssannssarr.zuni
 </code></pre></div>
-<p>Source checkout:</p>
+<p>For a source checkout:</p>
 <div class="highlight"><pre><span></span><code>git<span class="w"> </span>pull
 uv<span class="w"> </span>sync
 </code></pre></div>
 <h2 id="uninstall">Uninstall</h2>
-<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>tool<span class="w"> </span>uninstall<span class="w"> </span>zuni
+<p>Remove the tool installation with:</p>
+<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>tool<span class="w"> </span>uninstall<span class="w"> </span>ssannssarr.zuni
 </code></pre></div>
-<p>Optionally remove local configuration:</p>
+<p>If you also want to remove the local configuration:</p>
 <div class="highlight"><pre><span></span><code>rm<span class="w"> </span>-rf<span class="w"> </span>~/.config/zuni
 </code></pre></div>
 <h2 id="if-the-command-is-not-found">If the command is not found</h2>
+<p>Refresh uv's shell integration:</p>
 <div class="highlight"><pre><span></span><code>uv<span class="w"> </span>tool<span class="w"> </span>update-shell
 </code></pre></div>
-<p>Restart your terminal. More fixes are in <a href="../../guide/troubleshooting/">Troubleshooting</a>.</p>
+<p>Restart your terminal and try again. If the problem continues, see <a href="../../guide/troubleshooting/">Troubleshooting</a>.</p>
 
 
 
