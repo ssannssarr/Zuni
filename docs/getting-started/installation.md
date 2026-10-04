@@ -87,7 +87,7 @@ uv run zuni --help
 For a PyPI installation:
 
 ```bash
-uv tool upgrade zuni
+uv tool upgrade ssannssarr.zuni
 ```
 
 For a source checkout:
@@ -102,7 +102,7 @@ uv sync
 Remove the tool installation with:
 
 ```bash
-uv tool uninstall zuni
+uv tool uninstall ssannssarr.zuni
 ```
 
 If you also want to remove the local configuration:
