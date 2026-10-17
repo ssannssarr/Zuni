@@ -58,4 +58,16 @@ EXTRACT_MARKDOWN: dict[str, Any] = {
     },
 }
 
-TOOLS: list[dict[str, Any]] = [WEB_SEARCH, EXTRACT_MARKDOWN]
+DATETIME: dict[str, Any] = {
+    "type": "function",
+    "function": {
+        "name": "datetime",
+        "description": "Get the current date and time in the machine's local timezone.",
+        "parameters": {
+            "type": "object",
+            "properties": {},
+        },
+    },
+}
+
+TOOLS: list[dict[str, Any]] = [WEB_SEARCH, EXTRACT_MARKDOWN, DATETIME]

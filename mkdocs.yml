@@ -63,3 +63,6 @@ extra:
       link: mailto:ssannssarrai@gmail.com
     - icon: fontawesome/brands/instagram
       link: https://instagram.com/ssannssarrai
+
+extra_javascript:
+  - javascripts/cloudflare.js

@@ -6,6 +6,7 @@ from typing import Any
 
 from zuni.errors import ZuniError
 from zuni.search.search import fetch_page
+from zuni.tools.datetime_tool import current_datetime
 from zuni.tools.extract_markdown import extract_markdown, page_title
 from zuni.tools.web_search import Source, format_source, format_sources, web_search
 
@@ -57,6 +58,8 @@ class Toolbox:
                 return await self._web_search(args)
             if name == "extract_markdown":
                 return await self._extract_markdown(args)
+            if name == "datetime":
+                return current_datetime()
             return f"Error: unknown tool '{name}'."
         except ZuniError as exc:
             return f"Error: {exc}"
