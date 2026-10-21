@@ -66,3 +66,4 @@ extra:
 
 extra_javascript:
   - javascripts/cloudflare.js
+  - javascripts/home.js
