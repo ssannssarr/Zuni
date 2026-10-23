@@ -1,7 +1,8 @@
 """The tool-calling loop: ask, run requested tools, repeat, answer."""
 from __future__ import annotations
 
-from typing import Any, Callable
+from collections.abc import Callable
+from typing import Any
 
 from zuni.errors import APIError, ZuniError
 from zuni.llm.llm import LLM

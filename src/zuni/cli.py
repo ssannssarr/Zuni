@@ -13,10 +13,7 @@ from rich.markup import escape
 
 from zuni.agent import ToolsNotSupported, run_agent
 from zuni.errors import ZuniError
-from zuni.llm.config import (
-    save_config,
-    Config
-)
+from zuni.llm.config import Config, save_config
 from zuni.llm.llm import LLM
 from zuni.prompts.prompt import Prompt
 from zuni.tools.toolbox import Toolbox
@@ -52,7 +49,6 @@ async def main():
     """
     Zuni command-line interface.
     """
-    pass
 
 
 @main.command()

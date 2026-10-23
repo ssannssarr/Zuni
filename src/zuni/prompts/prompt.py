@@ -1,7 +1,6 @@
 "This file is for collecting prompts md text and distributing"
 from pathlib import Path
 
-
 PROMPTS_DIR = Path(__file__).parent
 
 
