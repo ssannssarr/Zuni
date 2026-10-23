@@ -11,14 +11,14 @@ hide:
   <nav aria-label="Primary navigation" class="zuni-nav">
     <a href="#features">Features</a>
     <a href="#quick-start">Quick start</a>
-    <a href="https://ssannssarr.github.io/Zuni/">Docs <span aria-hidden="true">↗</span></a>
+    <a href="getting-started/installation">Docs <span aria-hidden="true">↗</span></a>
     <a href="https://github.com/ssannssarr/Zuni">GitHub <span aria-hidden="true">↗</span></a>
   </nav>
   <button class="zuni-copy-top" data-copy="uv tool install ssannssarr.zuni"><span aria-hidden="true">$</span> <span data-copy-label>uv tool install</span></button>
   <button class="zuni-menu-toggle" type="button" aria-expanded="false" aria-controls="zuni-mobile-nav" aria-label="Open menu"><span></span><span></span></button>
 </header>
 <nav id="zuni-mobile-nav" class="zuni-mobile-nav" aria-label="Mobile navigation" hidden>
-  <a href="#features">Features</a><a href="#quick-start">Quick start</a><a href="https://ssannssarr.github.io/Zuni/">Docs ↗</a><a href="https://github.com/ssannssarr/Zuni">GitHub ↗</a>
+  <a href="#features">Features</a><a href="#quick-start">Quick start</a><a href="getting-started/installation/">Docs ↗</a><a href="https://github.com/ssannssarr/Zuni">GitHub ↗</a>
 </nav>
 
 <main id="zuni-main">
