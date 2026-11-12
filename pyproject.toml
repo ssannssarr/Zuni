@@ -51,7 +51,7 @@ module-name = "zuni"
 
 [dependency-groups]
 dev = [
-    "mkdocs-material>=9.7.7",
+    "zensical>=0.1.1",
 ]
 
 [[tool.uv.index]]

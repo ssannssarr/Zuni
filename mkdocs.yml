@@ -7,6 +7,8 @@ repo_url: https://github.com/ssannssarr/Zuni
 
 theme:
   name: material
+  logo: assets/zuni-logo.png
+  favicon: assets/favicon-512x512.png 
   font:
     text: Space Grotesk
     code: JetBrains Mono
