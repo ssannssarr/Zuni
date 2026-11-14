@@ -83,7 +83,7 @@ Clone the repository and install the project with its development dependencies:
 ```bash
 git clone https://github.com/ssannssarr/Zuni.git
 cd Zuni
-uv sync
+uv sync --dev 
 ```
 
 Run the CLI from the project environment:
