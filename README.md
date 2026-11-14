@@ -1,5 +1,10 @@
 # Zuni
 
+![commits-since-last-release](https://img.shields.io/github/commits-since/ssannssarr/Zuni/latest)
+![GitHub Actions Workflow Status](https://img.shields.io/github/check-runs/ssannssarr/Zuni/main)
+
+
+
 **Zuni** is a terminal research assistant that combines an OpenAI-compatible LLM with web search and source citations.
 
 ## Features
