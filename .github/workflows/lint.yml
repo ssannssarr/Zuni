@@ -1,0 +1,34 @@
+name: Linter
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  env:
+    matrix:
+      python-version: [3.11, 3.12, 3.13, 3.14, 3.15]
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: setup uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          python-version: ${{ matrix.python-version }}
+      
+      - name: Install dependencies
+        run: |
+          uv sync --dev
+      
+      - name: Run Linter
+        run: |
+          uv run pylint --rcfile=.pylintrc zuni
