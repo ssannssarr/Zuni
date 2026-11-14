@@ -2,6 +2,7 @@
 
 Zuni keeps its main responsibilities separated across the CLI, LLM client, agent, search layer, tools, prompts, and documentation.
 
+
 ```text
 Zuni/
 ├── README.md
@@ -98,7 +99,7 @@ The schema name and dispatcher name must remain consistent.
 Preview the documentation locally with:
 
 ```bash
-uv run mkdocs serve
+uv run zensical serve
 ```
 
 When code behavior changes, update the corresponding documentation page in the same change whenever practical.
