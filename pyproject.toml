@@ -32,7 +32,6 @@ dependencies = [
     "rich>=15.0.0",
     "markdownify>=1.0.0",
     "pylint>=4.1.3",
-    "ruff>=0.17.5",
 ]
 
 [project.scripts]
@@ -51,7 +50,8 @@ build-backend = "uv_build"
 [tool.uv.build-backend]
 module-name = "zuni"
 
-[dependency-groups]
+[optional.dependency-groups]
+
 dev = [
     "zensical>=0.1.1",
 ]
