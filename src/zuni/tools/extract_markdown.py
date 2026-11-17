@@ -55,8 +55,3 @@ def page_title(html: str, fallback: str = "") -> str:
     if soup.title and soup.title.get_text(strip=True):
         return " ".join(soup.title.get_text().split())
     return fallback
-
-if __name__ == "__main__":
-    import sys
-    html = sys.stdin.read()
-    print(extract_markdown(html))
